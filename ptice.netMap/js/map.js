@@ -425,7 +425,7 @@ var overlays = [
 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
     L.Control.styledLayerControl(baseMaps, overlays, {collapsed:true}).addTo(map);
 }
-else if (document.getElementById("map").offsetWidth<1025) {
+else if (document.getElementById("map").clientWidth<1025) {
     L.Control.styledLayerControl(baseMaps, overlays, {collapsed:true}).addTo(map);
 }
 else {
