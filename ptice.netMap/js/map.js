@@ -1,13 +1,5 @@
-var map = L.map('map', { fullscreenControl: true,zoomControl:false }).fitBounds([[42.3249920703,13.2426149546],[46.4813372927,22.6741992938]]);
-var hash = new L.Hash(map); //add hashes to html address to easy share locations
 var additional_attrib = 'Kartu izradila <a href="http://www.biom.hr/">Udruga BIOM</a> u sklopu projekta Ptice oko nas';
 var additional_attrib2 = 'Kartu izradila <a href="http://www.biom.hr/">Udruga BIOM</a> u sklopu projekta Ptice oko nas. Podloge <a href="http://www.dgu.hr/">Državne Geodetske uprave</a>';
-
-L.Control.geocoder({position:"topleft",placeholder:"Traži..."}).addTo(map);
-
-// home icon
-var zoomHome = L.Control.zoomHome({position: 'topleft'});
-zoomHome.addTo(map);
 
 var basemap_0 = L.tileLayer.wms('http://geoportal.dgu.hr/wms', {
     layers: 'DOF',
@@ -24,8 +16,6 @@ var basemap_1 = L.tileLayer.wms('http://geoportal.dgu.hr/wms', {
 var basemap_2 = L.tileLayer('http://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png', {
     attribution: additional_attrib
 });
-
-basemap_2.addTo(map);
 
 //dodavanje fucnkcije za promijenu boje
 function highlight (layer) {
@@ -300,7 +290,7 @@ function doStyleiwc(feature) {
             };
             break;
     }
-};
+}
 
 var iwc = new L.geoJson(exp_iwc,{
     onEachFeature: onEachFeatureIwc,
@@ -341,7 +331,7 @@ var zp = new L.geoJson(exp_zps,{
     style: doStyleZp
 });
 
-zp.addTo(map);
+// zp.addTo(map);
 
 function doStyleSpas(feature) {
     return {
@@ -401,7 +391,7 @@ var baseMaps = [
     }                      
 ]; 
 
-var overlays = [
+var overlays2 = [
     {
     groupName : "Zaštićena područja",
     expanded  : true,
@@ -421,20 +411,51 @@ var overlays = [
     }
 ];
 
-// var sidebar = L.control.sidebar('sidebar').addTo(map);
+var overlays = {
+    "zp":zp,
+    "spas":spas,
+    "pscis":pscis,
+    "iwc":iwc,
+    "piljIlas":piljIlas
+};
+/*
+var base = {
+    "osm":basemap_2,
+    "tk25":basemap_1,
+    "dof":basemap_0
+}*/
 
-// check if mobile or desktop and load elevation profile and controls accordingly
-if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-    L.Control.styledLayerControl(baseMaps, overlays, {collapsed:true}).addTo(map);
+// var baseLayer = (base[params.base]) ? [base[params.base]] : [base.Topographic];
+
+var params = {};
+window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+  params[key] = decodeURIComponent(value);
+});
+
+if (params.layers) {
+    var layers = params.layers.split(',').map(function(item) { 
+    return overlays[item]; 
+    });
 }
-else if (document.getElementById("map").offsetWidth<1025) {
-    L.Control.styledLayerControl(baseMaps, overlays, {collapsed:true}).addTo(map);
-}
-else {
-    L.Control.styledLayerControl(baseMaps, overlays, {collapsed:false}).addTo(map);
-} 
+
+var map = L.map('map', { center: [params.lat || 44.598, params.lng || 18.589], zoom: 7, fullscreenControl: true,layers: layers || zp});
+
+L.Control.geocoder({position:"topleft",placeholder:"Traži..."}).addTo(map);
+
+basemap_2.addTo(map);
 
 // locate control
 L.control.locate().addTo(map);
 
 L.control.scale({options: {position: 'bottomleft',maxWidth: 100,metric: true,imperial: false,updateWhenIdle: false}}).addTo(map);
+
+// check if mobile or desktop and load elevation profile and controls accordingly
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    L.Control.styledLayerControl(baseMaps, overlays2, {collapsed:true}).addTo(map);
+}
+else if (document.getElementById("map").offsetWidth<1025) {
+    L.Control.styledLayerControl(baseMaps, overlays2, {collapsed:true}).addTo(map);
+}
+else {
+    L.Control.styledLayerControl(baseMaps, overlays2, {collapsed:false}).addTo(map);
+}
