@@ -40,3 +40,7 @@ th {
 .ac-container input.menu:checked + label, .ac-container input.menu:checked + label:hover {
     background: #b7deb7 none repeat scroll 0 0 !important;
 }
+
+.leaflet-control-locate a {
+	padding:0;
+}

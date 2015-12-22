@@ -3,6 +3,8 @@ var hash = new L.Hash(map); //add hashes to html address to easy share locations
 var additional_attrib = 'Kartu izradila <a href="http://www.biom.hr/">Udruga BIOM</a> u sklopu projekta Ptice oko nas';
 var additional_attrib2 = 'Kartu izradila <a href="http://www.biom.hr/">Udruga BIOM</a> u sklopu projekta Ptice oko nas. Podloge <a href="http://www.dgu.hr/">Državne Geodetske uprave</a>';
 
+L.Control.geocoder({position:"topleft",placeholder:"Traži..."}).addTo(map);
+
 // home icon
 var zoomHome = L.Control.zoomHome({position: 'topleft'});
 zoomHome.addTo(map);
@@ -425,7 +427,7 @@ var overlays = [
 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
     L.Control.styledLayerControl(baseMaps, overlays, {collapsed:true}).addTo(map);
 }
-else if (document.getElementById("map").clientWidth<1025) {
+else if (document.getElementById("map").offsetWidth<1025) {
     L.Control.styledLayerControl(baseMaps, overlays, {collapsed:true}).addTo(map);
 }
 else {
