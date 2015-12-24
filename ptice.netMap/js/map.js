@@ -1,20 +1,20 @@
-var additional_attrib = 'Kartu izradila <a href="http://www.biom.hr/">Udruga BIOM</a> u sklopu projekta Ptice oko nas';
-var additional_attrib2 = 'Kartu izradila <a href="http://www.biom.hr/">Udruga BIOM</a> u sklopu projekta Ptice oko nas. Podloge <a href="http://www.dgu.hr/">Državne Geodetske uprave</a>';
+var attrib = 'Kartu izradila <a href="http://www.biom.hr/">Udruga BIOM</a> u sklopu projekta Ptice oko nas';
+var attrib2 = 'Kartu izradila <a href="http://www.biom.hr/">Udruga BIOM</a> u sklopu projekta Ptice oko nas. Podloge <a href="http://www.dgu.hr/">Državne Geodetske uprave</a>';
 
 var basemap_0 = L.tileLayer.wms('http://geoportal.dgu.hr/wms', {
     layers: 'DOF',
     format: 'image/jpeg',
-    attribution: additional_attrib2
+    attribution: attrib2
 });
 
 var basemap_1 = L.tileLayer.wms('http://geoportal.dgu.hr/wms', {
     layers: 'TK25',
     format: 'image/jpeg',
-    attribution: additional_attrib2
+    attribution: attrib2
 });
 
 var basemap_2 = L.tileLayer('http://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png', {
-    attribution: additional_attrib
+    attribution: attrib
 });
 
 //dodavanje fucnkcije za promijenu boje
@@ -26,7 +26,6 @@ function highlight (layer) {
         opacity: 0.7,
         fillOpacity: 0.7
     });
-//     layer.bringToFront();
 }
 
 //dodavanje fucnkcije za vraćanje boje na staro
@@ -43,6 +42,9 @@ function dehighlightPil (layer) {
 }
 
 function dehighlightZp (layer) {
+	if(layer==zp){
+		console.log('aaaa')
+	}
     if (selected === null || selected._leaflet_id !== layer._leaflet_id) {
         zp.resetStyle(layer);
     }
@@ -50,29 +52,22 @@ function dehighlightZp (layer) {
 
 function dehighlightSpas (layer) {
     if (selected === null || selected._leaflet_id !== layer._leaflet_id) {
-        spas.setStyle(doStyleSpas(layer));
-        pscis.setStyle(doStylePscis(layer));
+        spas.resetStyle(layer);
+    }
+}
+
+function dehighlightPscis (layer) {
+    if (selected === null || selected._leaflet_id !== layer._leaflet_id) {
+        pscis.resetStyle(layer);
     }
 }
 
 var selected = null;
-
 function select (layer) {
-    // See if there is already a selection
-    if (selected !== null) {
-        // Store for now
-        var previous = selected;
-    }
-    // Set new selection
     selected = layer;
-    // If there was a previous selection
-    if (previous) {
-        // Dehighlight previous
-        dehighlight(previous);
-    }
 }
 
-//sklapanje gornjih funkcija u oneachfeature za biciklističke staze
+//onEachFeature funkcije
 function onEachFeatureIwc(feature, layer) {
     layer.on({
         'mouseover': function (e) {
@@ -86,14 +81,13 @@ function onEachFeatureIwc(feature, layer) {
         },
         'popupclose':function (e) {
             selected=null;
-            iwc.resetStyle(layer);
+            iwc.resetStyle(e.target);
         }
     });
     var popupContent = '<table><tr><th scope="row">Ime lokaliteta</th><td>' + Autolinker.link(String(feature.properties['Name'])) + '</td></tr><tr><th scope="row">Tip lokaliteta</th><td>' + Autolinker.link(String(feature.properties['tip'])) + '</td></tr></table>';
     layer.bindPopup(popupContent);
 }
 
-//sklapanje gornjih funkcija u oneachfeature za biciklističke staze
 function onEachFeaturePil(feature, layer) {
     layer.on({
         'mouseover': function (e) {
@@ -107,7 +101,7 @@ function onEachFeaturePil(feature, layer) {
         },
         'popupclose':function (e) {
             selected=null;
-            piljIlas.resetStyle(layer);
+            piljIlas.resetStyle(e.target);
         }
     });
     var popupContent = '<table><tr><th scope="row">Kod kvadranta</th><td>' + Autolinker.link(String(feature.properties['Name'])) + '</td></tr><tr><th scope="row">Županija</th><td>' + Autolinker.link(String(feature.properties['Zupanija'])) + '</td></tr></table>';
@@ -127,7 +121,7 @@ function onEachFeatureZp(feature, layer) {
         },
         'popupclose':function (e) {
             selected=null;
-            zp.resetStyle(layer);
+            zp.resetStyle(e.target);
         }
     });
     var popupContent = '<table><tr><th scope="row">Ime zaštićenog područja</th><td>' + Autolinker.link(String(feature.properties['Name'])) + '</td></tr><tr><th scope="row">Kategorija zaštite</th><td>' + Autolinker.link(String(feature.properties['kat'])) + '</td></tr><tr><th scope="row">Potkategorija zaštite</th><td>' + Autolinker.link(String(feature.properties['podkat']))+ '</td></tr><tr><th scope="row">Kategorija zaštite na engleskom jeziku</th><td>' + Autolinker.link(String(feature.properties['kat_eng']))+ '</td></tr><tr><th scope="row">Kategorija zaštite prema IUCN-u</th><td>' + Autolinker.link(String(feature.properties['IUCN']))+'</td></tr><tr><th scope="row">Zaštita proglašena godine</th><td>' + Autolinker.link(String(feature.properties['DAT_A']))+'</td></tr></table>';
@@ -147,8 +141,27 @@ function onEachFeatureSpas(feature, layer) {
         },
         'popupclose':function (e) {
             selected=null;
-            spas.setStyle(doStyleSpas(layer));
-            pscis.setStyle(doStylePscis(layer));
+            spas.resetStyle(e.target);
+        }
+    });
+    var popupContent = '<table><tr><th scope="row">Ime zaštićenog područja</th><td>' + Autolinker.link(String(feature.properties['Name'])) + '</td></tr><tr><th scope="row">Kod područja</th><td>' + Autolinker.link(String(feature.properties['kod'])) + '</td></tr><tr><th scope="row">Dodatne informacije</th><td>' + Autolinker.link(String(feature.properties['url']))+'</td></tr></table>';
+    layer.bindPopup(popupContent);
+}
+
+function onEachFeaturePscis(feature, layer) {
+    layer.on({
+        'mouseover': function (e) {
+            highlight(e.target);
+        },
+        'mouseout': function (e) {
+            dehighlightPscis(e.target);
+        },
+        'click': function (e) {
+            select(e.target);
+        },
+        'popupclose':function (e) {
+            selected=null;
+            pscis.resetStyle(e.target);
         }
     });
     var popupContent = '<table><tr><th scope="row">Ime zaštićenog područja</th><td>' + Autolinker.link(String(feature.properties['Name'])) + '</td></tr><tr><th scope="row">Kod područja</th><td>' + Autolinker.link(String(feature.properties['kod'])) + '</td></tr><tr><th scope="row">Dodatne informacije</th><td>' + Autolinker.link(String(feature.properties['url']))+'</td></tr></table>';
@@ -331,8 +344,6 @@ var zp = new L.geoJson(exp_zps,{
     style: doStyleZp
 });
 
-// zp.addTo(map);
-
 function doStyleSpas(feature) {
     return {
         weight: '1.3',
@@ -363,7 +374,7 @@ function doStylePscis(feature) {
 }
 
 var pscis = new L.geoJson(exp_pscis,{
-    onEachFeature: onEachFeatureSpas,
+    onEachFeature: onEachFeaturePscis,
     style: doStylePscis
 });
 
@@ -376,7 +387,7 @@ var baseMaps = [
             'TK25':basemap_1,
             'Digitalni ortofoto':basemap_0
         }
-    }                      
+    }
 ]; 
 
 var baseMaps = [
@@ -388,7 +399,7 @@ var baseMaps = [
             'TK25':basemap_1,
             'Digitalni ortofoto':basemap_0
         }
-    }                      
+    }
 ]; 
 
 var overlays2 = [
@@ -399,25 +410,18 @@ var overlays2 = [
         "Zaštićena područja u RH": zp,
         "Područja značajna za očuvanje divljih ptica": spas,
         "Područja značajna za očuvanje drugih divljih vrsta i njihovih staništa":pscis
-    }   
-    },  
+    }
+    },
     {
     groupName : "Istraživanja ptica",
     expanded  : true,
     layers    : { 
         "Lokaliteti za zimsko prebrojavanje ptica": iwc,
         "Kvadranti za monitoring piljaka i lastavica":piljIlas
-    }   
+    }
     }
 ];
 
-var overlays = {
-    "zp":zp,
-    "spas":spas,
-    "pscis":pscis,
-    "iwc":iwc,
-    "piljIlas":piljIlas
-};
 /*
 var base = {
     "osm":basemap_2,
@@ -433,6 +437,13 @@ window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) 
 });
 
 if (params.layers) {
+	var overlays = {
+    "zp":zp,
+    "spas":spas,
+    "pscis":pscis,
+    "iwc":iwc,
+    "piljIlas":piljIlas
+	};
     var layers = params.layers.split(',').map(function(item) { 
     return overlays[item]; 
     });
@@ -440,17 +451,9 @@ if (params.layers) {
 
 var map = L.map('map', { center: [params.lat || 44.598, params.lng || 18.589], zoom: 7, fullscreenControl: true,layers: layers || zp});
 
-L.Control.geocoder({position:"topleft",placeholder:"Traži..."}).addTo(map);
-
-basemap_2.addTo(map);
-
-// locate control
-L.control.locate().addTo(map);
-
-L.control.scale({options: {position: 'bottomleft',maxWidth: 100,metric: true,imperial: false,updateWhenIdle: false}}).addTo(map);
-
 // check if mobile or desktop and load elevation profile and controls accordingly
 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+	L.control.locate().addTo(map);
     L.Control.styledLayerControl(baseMaps, overlays2, {collapsed:true}).addTo(map);
 }
 else if (document.getElementById("map").offsetWidth<1025) {
@@ -459,3 +462,8 @@ else if (document.getElementById("map").offsetWidth<1025) {
 else {
     L.Control.styledLayerControl(baseMaps, overlays2, {collapsed:false}).addTo(map);
 }
+
+// addTomap initializations
+L.Control.geocoder({position:"topleft",placeholder:"Traži..."}).addTo(map);
+basemap_2.addTo(map);
+L.control.scale({options: {position: 'bottomleft',maxWidth: 100,metric: true,imperial: false,updateWhenIdle: false}}).addTo(map);
