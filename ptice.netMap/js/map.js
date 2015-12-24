@@ -42,9 +42,6 @@ function dehighlightPil (layer) {
 }
 
 function dehighlightZp (layer) {
-	if(layer==zp){
-		console.log('aaaa')
-	}
     if (selected === null || selected._leaflet_id !== layer._leaflet_id) {
         zp.resetStyle(layer);
     }
