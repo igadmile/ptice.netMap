@@ -81,7 +81,7 @@ function onEachFeatureIwc(feature, layer) {
             iwc.resetStyle(e.target);
         }
     });
-    var popupContent = '<table><tr><th scope="row">Ime lokaliteta</th><td>' + Autolinker.link(String(feature.properties['n'])) + '</td></tr><tr><th scope="row">Tip lokaliteta</th><td>' + Autolinker.link(String(feature.properties['t'])) + '</td></tr></table>';
+    var popupContent ='<div style="text-align:center"><h3>'+Autolinker.link(String(feature.properties['n']))+'</h3></div>'+'<table><tr><th scope="row">Tip lokaliteta</th><td>'+Autolinker.link(String(feature.properties['t']))+'</td></tr></table>';
     layer.bindPopup(popupContent);
 }
 
@@ -101,7 +101,7 @@ function onEachFeaturePil(feature, layer) {
             piljIlas.resetStyle(e.target);
         }
     });
-    var popupContent = '<table><tr><th scope="row">Kod kvadranta</th><td>' + Autolinker.link(String(feature.properties['n'])) + '</td></tr><tr><th scope="row">Županija</th><td>' + Autolinker.link(String(feature.properties['z'])) + '</td></tr></table>';
+    var popupContent ='<div style="text-align:center"><h3>'+Autolinker.link(String(feature.properties['n']))+'</h3></div>'+'<table><tr><th scope="row">Županija</th><td>'+Autolinker.link(String(feature.properties['z'])) + '</td></tr></table>';
     layer.bindPopup(popupContent);
 }
 
@@ -121,7 +121,7 @@ function onEachFeatureZp(feature, layer) {
             zp.resetStyle(e.target);
         }
     });
-    var popupContent = '<table><tr><th scope="row">Ime zaštićenog područja</th><td>' + Autolinker.link(String(feature.properties['n'])) + '</td></tr><tr><th scope="row">Kategorija zaštite</th><td>' + Autolinker.link(String(feature.properties['kat'])) + '</td></tr><tr><th scope="row">Potkategorija zaštite</th><td>' + Autolinker.link(String(feature.properties['pkat']))+ '</td></tr><tr><th scope="row">Kategorija zaštite na engleskom jeziku</th><td>' + Autolinker.link(String(feature.properties['kateng']))+ '</td></tr><tr><th scope="row">Kategorija zaštite prema IUCN-u</th><td>' + Autolinker.link(String(feature.properties['i']))+'</td></tr><tr><th scope="row">Zaštita proglašena godine</th><td>' + Autolinker.link(String(feature.properties['g']))+'</td></tr></table>';
+    var popupContent ='<div style="text-align:center"><h3>'+Autolinker.link(String(feature.properties['n']))+'</h3></div>'+ '<table><tr><th scope="row">Kategorija zaštite</th><td>'+ Autolinker.link(String(feature.properties['kat'])) + '</td></tr><tr><th scope="row">Potkategorija zaštite</th><td>' + Autolinker.link(String(feature.properties['pkat']))+ '</td></tr><tr><th scope="row">Kategorija zaštite na engleskom jeziku</th><td>' + Autolinker.link(String(feature.properties['kateng']))+ '</td></tr><tr><th scope="row">Kategorija zaštite prema IUCN-u</th><td>' + Autolinker.link(String(feature.properties['i']))+'</td></tr><tr><th scope="row">Zaštita proglašena godine</th><td>' + Autolinker.link(String(feature.properties['g']))+'</td></tr></table>';
     layer.bindPopup(popupContent);
 }
 
@@ -141,7 +141,7 @@ function onEachFeatureSpas(feature, layer) {
             spas.resetStyle(e.target);
         }
     });
-    var popupContent = '<table><tr><th scope="row">Ime zaštićenog područja</th><td>' + Autolinker.link(String(feature.properties['n'])) + '</td></tr><tr><th scope="row">Kod područja</th><td>' + Autolinker.link(String(feature.properties['k'])) + '</td></tr><tr><th scope="row">Dodatne informacije</th><td>' + Autolinker.link(String(feature.properties['u']))+'</td></tr></table>';
+    var popupContent ='<div style="text-align:center"><h3>'+Autolinker.link(String(feature.properties['n']))+'</h3></div>'+'<table><tr><th scope="row">Kod područja</th><td>'+Autolinker.link(String(feature.properties['k']))+'</td></tr><tr><th scope="row">Dodatne informacije</th><td>'+Autolinker.link(String(feature.properties['u'])+String(feature.properties['k']))+'</td></tr></table>';
     layer.bindPopup(popupContent);
 }
 
@@ -161,7 +161,7 @@ function onEachFeaturePscis(feature, layer) {
             pscis.resetStyle(e.target);
         }
     });
-    var popupContent = '<table><tr><th scope="row">Ime zaštićenog područja</th><td>' + Autolinker.link(String(feature.properties['n'])) + '</td></tr><tr><th scope="row">Kod područja</th><td>' + Autolinker.link(String(feature.properties['k'])) + '</td></tr><tr><th scope="row">Dodatne informacije</th><td>' + Autolinker.link(String(feature.properties['u']))+'</td></tr></table>';
+    var popupContent ='<div style="text-align:center"><h3>'+Autolinker.link(String(feature.properties['n']))+'</h3></div>'+'<table><tr><th scope="row">Kod područja</th><td>'+Autolinker.link(String(feature.properties['k']))+'</td></tr><tr><th scope="row">Dodatne informacije</th><td>'+Autolinker.link(String(feature.properties['u'])+String(feature.properties['k']))+'</td></tr></table>';
     layer.bindPopup(popupContent);
 }
 
