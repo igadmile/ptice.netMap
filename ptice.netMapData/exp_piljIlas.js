@@ -1,6 +1,5 @@
 var exp_piljIlas = {
 "type": "FeatureCollection",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
                                                                                 
 "features": [
 { "type": "Feature", "properties": { "n": "1kmE4601N2486", "z": "Istarska županija" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 13.57391, 45.4259 ], [ 13.5745, 45.4349 ], [ 13.58725, 45.43447 ], [ 13.58666, 45.42547 ], [ 13.57391, 45.4259 ] ] ] } },

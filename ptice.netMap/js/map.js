@@ -59,6 +59,12 @@ function dehighlightPscis (layer) {
     }
 }
 
+function dehighlightRez (layer) {
+    if (selected === null || selected._leaflet_id !== layer._leaflet_id) {
+        rez.resetStyle(layer);
+    }
+}
+
 var selected = null;
 function select (layer) {
     selected = layer;
@@ -165,141 +171,160 @@ function onEachFeaturePscis(feature, layer) {
     layer.bindPopup(popupContent);
 }
 
+function onEachFeatureRez(feature, layer) {
+    layer.on({
+        'mouseover': function (e) {
+            highlight(e.target);
+        },
+        'mouseout': function (e) {
+            dehighlightRez(e.target);
+        },
+        'click': function (e) {
+            select(e.target);
+        },
+        'popupclose':function (e) {
+            selected=null;
+            rez.resetStyle(e.target);
+        }
+    });
+    var popupContent ='<div style="text-align:center"><h3>'+Autolinker.link(String(feature.properties['n']))+'</h3></div>'+ '<table><tr><th scope="row">Osnovne informacije</th><td>'+ Autolinker.link(String(feature.properties['in'])) + '</td></tr><tr><th scope="row">Tip rezervata</th><td>' + Autolinker.link(String(feature.properties['pkat']))+ '</td></tr><tr><th scope="row">Županija</th><td>' + Autolinker.link(String(feature.properties['z']))+ '</td></tr><tr><th scope="row">Općina</th><td>' + Autolinker.link(String(feature.properties['o']))+'</td></tr><tr><th scope="row">Zaštita proglašena</th><td>' + Autolinker.link(String(feature.properties['g']))+'</td></tr><tr><th scope="row">Površina (Ha)</th><td>'+Autolinker.link(String(feature.properties['p']))+'</td></tr></table>';
+    layer.bindPopup(popupContent);
+}
+
 function doStyleiwc(feature) {
-    switch (feature.properties.tipid) {
-        case 1:
-            return {
-                weight: '1.3',
-                fillColor: '#d4e64c',
-                color: '#e31a1c',
-                weight: '1',
-                dashArray: '',
-                opacity: '1.0',
-                fillOpacity: '0.3',
-            };
-            break;
-        case 2:
-            return {
-                weight: '1.3',
-                fillColor: '#74ce3c',
-                color: '#e31a1c',
-                weight: '1',
-                dashArray: '',
-                opacity: '1.0',
-                fillOpacity: '0.3',
-            };
-            break;
-        case 3:
-            return {
-                weight: '1.3',
-                fillColor: '#ef9d19',
-                color: '#e31a1c',
-                weight: '1',
-                dashArray: '',
-                opacity: '1.0',
-                fillOpacity: '0.3',
-            };
-            break;
-        case 4:
-            return {
-                weight: '1.3',
-                fillColor: '#d713bd',
-                color: '#e31a1c',
-                weight: '1',
-                dashArray: '',
-                opacity: '1.0',
-                fillOpacity: '0.3',
-            };
-            break;
-        case 5:
-            return {
-                weight: '1.3',
-                fillColor: '#43cbdd',
-                color: '#e31a1c',
-                weight: '1',
-                dashArray: '',
-                opacity: '1.0',
-                fillOpacity: '0.3',
-            };
-            break;
-        case 6:
-            return {
-                weight: '1.3',
-                fillColor: '#1aee9d',
-                color: '#e31a1c',
-                weight: '1',
-                dashArray: '',
-                opacity: '1.0',
-                fillOpacity: '0.3',
-            };
-            break;
-        case 7:
-            return {
-                weight: '1.3',
-                fillColor: '#8715c9',
-                color: '#e31a1c',
-                weight: '1',
-                dashArray: '',
-                opacity: '1.0',
-                fillOpacity: '0.3',
-            };
-            break;
-        case 8:
-            return {
-                weight: '1.3',
-                fillColor: '#e13b25',
-                color: '#e31a1c',
-                weight: '1',
-                dashArray: '',
-                opacity: '1.0',
-                fillOpacity: '0.3',
-            };
-            break;
-        case 9:
-            return {
-                weight: '1.3',
-                fillColor: '#4bd95b',
-                color: '#e31a1c',
-                weight: '1',
-                dashArray: '',
-                opacity: '1.0',
-                fillOpacity: '0.3',
-            };
-            break;
-        case 10:
-            return {
-                weight: '1.3',
-                fillColor: '#3720c9',
-                color: '#e31a1c',
-                weight: '1',
-                dashArray: '',
-                opacity: '1.0',
-                fillOpacity: '0.3',
-            };
-            break;
-        case 11:
-            return {
-                weight: '1.3',
-                fillColor: '#1261ea',
-                color: '#e31a1c',
-                weight: '1',
-                dashArray: '',
-                opacity: '1.0',
-                fillOpacity: '0.3',
-            };
-            break;
-        default:
+//     switch (feature.properties.tipid) {
+//         case 1:
+//             return {
+//                 weight: '1.3',
+//                 fillColor: '#d4e64c',
+//                 color: '#e31a1c',
+//                 weight: '1',
+//                 dashArray: '',
+//                 opacity: '1.0',
+//                 fillOpacity: '0.3',
+//             };
+//             break;
+//         case 2:
+//             return {
+//                 weight: '1.3',
+//                 fillColor: '#74ce3c',
+//                 color: '#e31a1c',
+//                 weight: '1',
+//                 dashArray: '',
+//                 opacity: '1.0',
+//                 fillOpacity: '0.3',
+//             };
+//             break;
+//         case 3:
+//             return {
+//                 weight: '1.3',
+//                 fillColor: '#ef9d19',
+//                 color: '#e31a1c',
+//                 weight: '1',
+//                 dashArray: '',
+//                 opacity: '1.0',
+//                 fillOpacity: '0.3',
+//             };
+//             break;
+//         case 4:
+//             return {
+//                 weight: '1.3',
+//                 fillColor: '#d713bd',
+//                 color: '#e31a1c',
+//                 weight: '1',
+//                 dashArray: '',
+//                 opacity: '1.0',
+//                 fillOpacity: '0.3',
+//             };
+//             break;
+//         case 5:
+//             return {
+//                 weight: '1.3',
+//                 fillColor: '#43cbdd',
+//                 color: '#e31a1c',
+//                 weight: '1',
+//                 dashArray: '',
+//                 opacity: '1.0',
+//                 fillOpacity: '0.3',
+//             };
+//             break;
+//         case 6:
+//             return {
+//                 weight: '1.3',
+//                 fillColor: '#1aee9d',
+//                 color: '#e31a1c',
+//                 weight: '1',
+//                 dashArray: '',
+//                 opacity: '1.0',
+//                 fillOpacity: '0.3',
+//             };
+//             break;
+//         case 7:
+//             return {
+//                 weight: '1.3',
+//                 fillColor: '#8715c9',
+//                 color: '#e31a1c',
+//                 weight: '1',
+//                 dashArray: '',
+//                 opacity: '1.0',
+//                 fillOpacity: '0.3',
+//             };
+//             break;
+//         case 8:
+//             return {
+//                 weight: '1.3',
+//                 fillColor: '#e13b25',
+//                 color: '#e31a1c',
+//                 weight: '1',
+//                 dashArray: '',
+//                 opacity: '1.0',
+//                 fillOpacity: '0.3',
+//             };
+//             break;
+//         case 9:
+//             return {
+//                 weight: '1.3',
+//                 fillColor: '#4bd95b',
+//                 color: '#e31a1c',
+//                 weight: '1',
+//                 dashArray: '',
+//                 opacity: '1.0',
+//                 fillOpacity: '0.3',
+//             };
+//             break;
+//         case 10:
+//             return {
+//                 weight: '1.3',
+//                 fillColor: '#3720c9',
+//                 color: '#e31a1c',
+//                 weight: '1',
+//                 dashArray: '',
+//                 opacity: '1.0',
+//                 fillOpacity: '0.3',
+//             };
+//             break;
+//         case 11:
+//             return {
+//                 weight: '1.3',
+//                 fillColor: '#1261ea',
+//                 color: '#e31a1c',
+//                 weight: '1',
+//                 dashArray: '',
+//                 opacity: '1.0',
+//                 fillOpacity: '0.3',
+//             };
+//             break;
+//         default:
             return {
                 weight: '1.3',
                 fillColor: '#e11f66',
                 color: '#e31a1c',
                 weight: '1',
-                dashArray: '',
                 opacity: '1.0',
                 fillOpacity: '0.3',
             };
-            break;
-    }
+//             break;
+//     }
 }
 
 var iwc = new L.geoJson(exp_iwc,{
@@ -313,7 +338,6 @@ function doStylepiljIlas(feature) {
         fillColor: '#e11f66',
         color: '#e31a1c',
         weight: '1',
-        dashArray: '',
         opacity: '1.0',
         fillOpacity: '0',
     };
@@ -330,7 +354,6 @@ function doStyleZp(feature) {
         fillColor: '#89cb3c',
         color: '#66982d',
         weight: '1',
-        dashArray: '',
         opacity: '1.0',
         fillOpacity: '0.3',
     };
@@ -347,7 +370,6 @@ function doStyleSpas(feature) {
         fillColor: '#4542c8',
         color: '#343298',
         weight: '1',
-        dashArray: '',
         opacity: '1.0',
         fillOpacity: '0.3',
     };
@@ -364,7 +386,6 @@ function doStylePscis(feature) {
         fillColor: '#d833d6',
         color: '#771c77',
         weight: '1',
-        dashArray: '',
         opacity: '1.0',
         fillOpacity: '0.3',
     };
@@ -373,6 +394,22 @@ function doStylePscis(feature) {
 var pscis = new L.geoJson(exp_pscis,{
     onEachFeature: onEachFeaturePscis,
     style: doStylePscis
+});
+
+function doStyleRez(feature) {
+    return {
+        weight: '1.3',
+        fillColor: '#dc627b',
+        color: '#974355',
+        weight: '1',
+        opacity: '1.0',
+        fillOpacity: '0.3',
+    };
+}
+
+var rez = new L.geoJson(exp_rez,{
+    onEachFeature: onEachFeatureRez,
+    style: doStyleRez
 });
 
 var baseMaps = [
@@ -404,6 +441,7 @@ var overlays2 = [
     groupName : "Zaštićena područja",
     expanded  : true,
     layers    : { 
+		"Ornitološki rezervati": rez,
         "Zaštićena područja u RH": zp,
         "Područja značajna za očuvanje divljih ptica": spas,
         "Područja značajna za očuvanje drugih divljih vrsta i njihovih staništa":pscis
@@ -435,6 +473,7 @@ window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) 
 
 if (params.layers) {
 	var overlays = {
+	"rez":rez,
     "zp":zp,
     "spas":spas,
     "pscis":pscis,
@@ -446,7 +485,7 @@ if (params.layers) {
     });
 }
 
-var map = L.map('map', { center: [params.lat || 44.598, params.lng || 18.589], zoom: 7, fullscreenControl: true,layers: layers || zp});
+var map = L.map('map', { center: [params.lat || 44.598, params.lng || 16.589], zoom: 7, fullscreenControl: true,layers: layers || zp});
 
 // check if mobile or desktop and load elevation profile and controls accordingly
 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
