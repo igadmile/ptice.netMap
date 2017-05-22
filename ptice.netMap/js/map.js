@@ -76,17 +76,17 @@ function select(layer) {
 //onEachFeature funkcije
 function onEachFeatureIwc(feature, layer) {
     layer.on({
-        'mouseover': function (e) {
+        mouseover: function (e) {
             highlight(e.target);
         },
-        'mouseout': function (e) {
+        mouseout: function (e) {
             dehighlight(e.target, 'iwc');
         },
-        'click tap': function (e) {
+        click: function (e) {
             select(e.target);
             highlight(e.target);
         },
-        'popupclose': function (e) {
+        popupclose: function (e) {
             selected = null;
             iwc.resetStyle(e.target);
         }
@@ -98,17 +98,17 @@ function onEachFeatureIwc(feature, layer) {
 
 function onEachFeaturePil(feature, layer) {
     layer.on({
-        'mouseover': function (e) {
+        mouseover: function (e) {
             highlight(e.target);
         },
-        'mouseout': function (e) {
+        mouseout: function (e) {
             dehighlight(e.target, 'pil');
         },
-        'click tap': function (e) {
+        click: function (e) {
             select(e.target);
             highlight(e.target);
         },
-        'popupclose': function (e) {
+        popupclose: function (e) {
             selected = null;
             piljIlas.resetStyle(e.target);
         }
@@ -120,17 +120,17 @@ function onEachFeaturePil(feature, layer) {
 
 function onEachFeatureZp(feature, layer) {
     layer.on({
-        'mouseover': function (e) {
+        mouseover: function (e) {
             highlight(e.target);
         },
-        'mouseout': function (e) {
+        mouseout: function (e) {
             dehighlight(e.target, 'zp');
         },
-        'click tap': function (e) {
+        click: function (e) {
             select(e.target);
             highlight(e.target);
         },
-        'popupclose': function (e) {
+        popupclose: function (e) {
             selected = null;
             zp.resetStyle(e.target);
         }
@@ -142,17 +142,17 @@ function onEachFeatureZp(feature, layer) {
 
 function onEachFeatureSpas(feature, layer) {
     layer.on({
-        'mouseover': function (e) {
+        mouseover: function (e) {
             highlight(e.target);
         },
-        'mouseout': function (e) {
+        mouseout: function (e) {
             dehighlight(e.target, 'spas');
         },
-        'click tap': function (e) {
+        click: function (e) {
             select(e.target);
             highlight(e.target);
         },
-        'popupclose': function (e) {
+        popupclose: function (e) {
             selected = null;
             spas.resetStyle(e.target);
         }
@@ -164,17 +164,17 @@ function onEachFeatureSpas(feature, layer) {
 
 function onEachFeaturePscis(feature, layer) {
     layer.on({
-        'mouseover': function (e) {
+        mouseover: function (e) {
             highlight(e.target);
         },
-        'mouseout': function (e) {
+        mouseout: function (e) {
             dehighlight(e.target, 'pscis');
         },
-        'click tap': function (e) {
+        click: function (e) {
             select(e.target);
             highlight(e.target);
         },
-        'popupclose': function (e) {
+        popupclose: function (e) {
             selected = null;
             pscis.resetStyle(e.target);
         }
@@ -186,17 +186,17 @@ function onEachFeaturePscis(feature, layer) {
 
 function onEachFeatureRez(feature, layer) {
     layer.on({
-        'mouseover': function (e) {
+        mouseover: function (e) {
             highlight(e.target);
         },
-        'mouseout': function (e) {
+        mouseout: function (e) {
             dehighlight(e.target, 'rez');
         },
-        'click tap': function (e) {
+        click: function (e) {
             select(e.target);
             highlight(e.target);
         },
-        'popupclose': function (e) {
+        popupclose: function (e) {
             selected = null;
             rez.resetStyle(e.target);
         }
