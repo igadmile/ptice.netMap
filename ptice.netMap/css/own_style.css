@@ -29,3 +29,7 @@ html,body {
 .leaflet-control-fullscreen-button {
 	background-position:0 0 !important;
 }
+
+.ac-large {
+    max-height: 150px !important;
+}
