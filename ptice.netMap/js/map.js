@@ -39,7 +39,6 @@ var attrib = 'Kartu izradila <a href="http://www.biom.hr/">Udruga BIOM</a> u skl
         style: doStyleRez
     });
 
-
 //dodavanje fucnkcije za promijenu boje
 function highlight(layer) {
     layer.setStyle({
@@ -67,7 +66,6 @@ function dehighlight(layer, layerName) {
         } else if (layerName === 'rez') {
             rez.resetStyle(layer);
         }
-
     }
 }
 
@@ -104,7 +102,7 @@ function onEachFeatureIwc(feature, layer) {
             iwc.resetStyle(e.target);
         }
     });
-    var popupContent = '<div style="text-align:center"><h3>' + feature.properties['n'] + '</h3></div>' + '<table><tr><th scope="row">Tip lokaliteta</th><td>' + feature.properties['t'] + '</td></tr></table>';
+    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Tip lokaliteta</th><td>' + feature.properties.t + '</td></tr></table>';
     layer.bindPopup(popupContent);
     layer._leaflet_id = feature.properties.n;
 }
@@ -126,7 +124,7 @@ function onEachFeaturePil(feature, layer) {
             piljIlas.resetStyle(e.target);
         }
     });
-    var popupContent = '<div style="text-align:center"><h3>' + feature.properties['n'] + '</h3></div>' + '<table><tr><th scope="row">Županija</th><td>' + feature.properties['z'] + '</td></tr></table>';
+    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Županija</th><td>' + feature.properties.z + '</td></tr></table>';
     layer.bindPopup(popupContent);
     layer._leaflet_id = feature.properties.n;
 }
@@ -148,7 +146,7 @@ function onEachFeatureZp(feature, layer) {
             zp.resetStyle(e.target);
         }
     });
-    var popupContent = '<div style="text-align:center"><h3>' + feature.properties['n'] + '</h3></div>' + '<table><tr><th scope="row">Kategorija zaštite</th><td>' + feature.properties['kat'] + '</td></tr><tr><th scope="row">Potkategorija zaštite</th><td>' + feature.properties['pkat'] + '</td></tr><tr><th scope="row">Kategorija zaštite na engleskom jeziku</th><td>' + feature.properties['kateng'] + '</td></tr><tr><th scope="row">Kategorija zaštite prema IUCN-u</th><td>' + feature.properties['i'] + '</td></tr><tr><th scope="row">Zaštita proglašena godine</th><td>' + feature.properties['g'] + '</td></tr></table>';
+    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Kategorija zaštite</th><td>' + feature.properties.kat + '</td></tr><tr><th scope="row">Potkategorija zaštite</th><td>' + feature.properties.pkat + '</td></tr><tr><th scope="row">Kategorija zaštite na engleskom jeziku</th><td>' + feature.properties.kateng + '</td></tr><tr><th scope="row">Kategorija zaštite prema IUCN-u</th><td>' + feature.properties.i + '</td></tr><tr><th scope="row">Zaštita proglašena godine</th><td>' + feature.properties.g + '</td></tr></table>';
     layer.bindPopup(popupContent);
     layer._leaflet_id = feature.properties.n;
 }
@@ -170,7 +168,7 @@ function onEachFeatureSpas(feature, layer) {
             spas.resetStyle(e.target);
         }
     });
-    var popupContent = '<div style="text-align:center"><h3>' + feature.properties['n'] + '</h3></div>' + '<table><tr><th scope="row">Kod područja</th><td>' + feature.properties['k'] + '</td></tr><tr><th scope="row">Dodatne informacije</th><td><a href=' + feature.properties['u'] + feature.properties['k'] + '>SDF obrazac</a></td></tr></table>';
+    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Kod područja</th><td>' + feature.properties.k + '</td></tr><tr><th scope="row">Dodatne informacije</th><td><a href=' + feature.properties.u + feature.properties.k + '>SDF obrazac</a></td></tr></table>';
     layer.bindPopup(popupContent);
     layer._leaflet_id = feature.properties.n;
 }
@@ -192,7 +190,7 @@ function onEachFeaturePscis(feature, layer) {
             pscis.resetStyle(e.target);
         }
     });
-    var popupContent = '<div style="text-align:center"><h3>' + feature.properties['n'] + '</h3></div>' + '<table><tr><th scope="row">Kod područja</th><td>' + feature.properties['k'] + '</td></tr><tr><th scope="row">Dodatne informacije</th><td><a href=' + feature.properties['u'] + feature.properties['k'] + '>SDF obrazac</a></td></tr></table>';
+    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Kod područja</th><td>' + feature.properties.k + '</td></tr><tr><th scope="row">Dodatne informacije</th><td><a href=' + feature.properties.u + feature.properties.k + '>SDF obrazac</a></td></tr></table>';
     layer.bindPopup(popupContent);
     layer._leaflet_id = feature.properties.n;
 }
@@ -214,7 +212,7 @@ function onEachFeatureRez(feature, layer) {
             rez.resetStyle(e.target);
         }
     });
-    var popupContent = '<div style="text-align:center"><h3>' + feature.properties['n'] + '</h3></div>' + '<table><tr><th scope="row">Osnovne informacije</th><td>' + feature.properties['in'] + '</td></tr><tr><th scope="row">Tip rezervata</th><td>' + feature.properties['pkat'] + '</td></tr><tr><th scope="row">Županija</th><td>' + feature.properties['z'] + '</td></tr><tr><th scope="row">Općina</th><td>' + feature.properties['o'] + '</td></tr><tr><th scope="row">Zaštita proglašena</th><td>' + feature.properties['g'] + '</td></tr><tr><th scope="row">Površina (Ha)</th><td>' + feature.properties['p'] + '</td></tr></table>';
+    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Osnovne informacije</th><td>' + feature.properties.in + '</td></tr><tr><th scope="row">Tip rezervata</th><td>' + feature.properties.pkat + '</td></tr><tr><th scope="row">Županija</th><td>' + feature.properties.z + '</td></tr><tr><th scope="row">Općina</th><td>' + feature.properties.o + '</td></tr><tr><th scope="row">Zaštita proglašena</th><td>' + feature.properties.g + '</td></tr><tr><th scope="row">Površina (Ha)</th><td>' + feature.properties.p + '</td></tr></table>';
     layer.bindPopup(popupContent);
     layer._leaflet_id = feature.properties.n;
 }
@@ -352,7 +350,6 @@ var map = L.map('map', {
     fullscreenControl: true,
     layers: layers || zp
 });
-
 
 // check if mobile or desktop and load elevation profile and controls accordingly
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
