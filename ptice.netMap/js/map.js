@@ -70,18 +70,7 @@ function dehighlight(layer, layerName) {
 }
 
 function select(layer) {
-    // See if there is already a selection
-    if (selected !== null) {
-        // Store for now
-        var previous = selected;
-    }
-    // Set new selection
     selected = layer;
-    // If there was a previous selection
-    if (previous) {
-        // Dehighlight previous
-        dehighlight(previous);
-    }
 }
 
 //onEachFeature funkcije
@@ -219,67 +208,61 @@ function onEachFeatureRez(feature, layer) {
 
 function doStyleiwc(feature) {
     return {
-        weight: '1.3',
         fillColor: '#e11f66',
         color: '#e31a1c',
         weight: '1',
         opacity: '1.0',
-        fillOpacity: '0.3',
+        fillOpacity: '0.3'
     };
 }
 
 function doStylepiljIlas(feature) {
     return {
-        weight: '1.3',
         fillColor: '#e11f66',
         color: '#e31a1c',
         weight: '1',
         opacity: '1.0',
-        fillOpacity: '0',
+        fillOpacity: '0'
     };
 }
 
 function doStyleZp(feature) {
     return {
-        weight: '1.3',
         fillColor: '#89cb3c',
         color: '#66982d',
         weight: '1',
         opacity: '1.0',
-        fillOpacity: '0.3',
+        fillOpacity: '0.3'
     };
 }
 
 function doStyleSpas(feature) {
     return {
-        weight: '1.3',
         fillColor: '#4542c8',
         color: '#343298',
         weight: '1',
         opacity: '1.0',
-        fillOpacity: '0.3',
+        fillOpacity: '0.3'
     };
 }
 
 function doStylePscis(feature) {
     return {
-        weight: '1.3',
         fillColor: '#d833d6',
         color: '#771c77',
         weight: '1',
         opacity: '1.0',
-        fillOpacity: '0.3',
+        fillOpacity: '0.3'
     };
 }
 
 function doStyleRez(feature) {
     return {
-        weight: '1.3',
         fillColor: '#dc627b',
         color: '#974355',
         weight: '1',
         opacity: '1.0',
-        fillOpacity: '0.3',
+        fillOpacity: '0.3'
     };
 }
 
@@ -369,7 +352,7 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 if (params.layers && params.feat) {
     boundsParams = {
         maxZoom: 17
-    }
+    };
     var featureCoordinates = layers[0]._layers[params.feat];
     layers[0]._layers[params.feat].fire('click', {
         latlng: featureCoordinates[Math.round((featureCoordinates.length) / 2)]
