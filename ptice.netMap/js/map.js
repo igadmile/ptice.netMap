@@ -299,32 +299,30 @@ var overlays2 = [
     }
 ];
 
-/*
-var base = {
-    "osm":basemap2,
-    "tk25":basemap1,
-    "dof":basemap0
-}*/
-
-// var baseLayer = (base[params.base]) ? [base[params.base]] : [base.Topographic];
-
 var params = {};
 window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
     params[key] = decodeURIComponent(value);
 });
 
+var base = {
+        osm: basemap2,
+        tk25: basemap1,
+        dof: basemap0
+    },
+    baseLayer = params.base ? base[params.base] : base.osm;
+
 if (params.layers) {
     var overlays = {
-        "rez": rez,
-        "zp": zp,
-        "spas": spas,
-        "pscis": pscis,
-        "iwc": iwc,
-        "piljIlas": piljIlas
-    };
-    var layers = params.layers.split(',').map(function (item) {
-        return overlays[item];
-    });
+            rez: rez,
+            zp: zp,
+            spas: spas,
+            pscis: pscis,
+            iwc: iwc,
+            piljIlas: piljIlas
+        },
+        layers = params.layers.split(',').map(function (item) {
+            return overlays[item];
+        });
 }
 
 var map = L.map('map', {
@@ -364,7 +362,7 @@ L.Control.geocoder({
     position: "topleft",
     placeholder: "Traži..."
 }).addTo(map);
-basemap2.addTo(map);
+baseLayer.addTo(map);
 L.control.scale({
     options: {
         position: 'bottomleft',
