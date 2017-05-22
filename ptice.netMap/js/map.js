@@ -52,39 +52,22 @@ function highlight(layer) {
 }
 
 //dodavanje fucnkcije za vraćanje boje na staro
-function dehighlightIwc(layer) {
+function dehighlight(layer, layerName) {
     if (selected === null || selected._leaflet_id !== layer._leaflet_id) {
-        iwc.resetStyle(layer);
-    }
-}
+        if (layerName === 'iwc') {
+            iwc.resetStyle(layer);
+        } else if (layerName === 'pil') {
+            piljIlas.resetStyle(layer);
+        } else if (layerName === 'zp') {
+            zp.resetStyle(layer);
+        } else if (layerName === 'spas') {
+            spas.resetStyle(layer);
+        } else if (layerName === 'pscis') {
+            pscis.resetStyle(layer);
+        } else if (layerName === 'rez') {
+            rez.resetStyle(layer);
+        }
 
-function dehighlightPil(layer) {
-    if (selected === null || selected._leaflet_id !== layer._leaflet_id) {
-        piljIlas.resetStyle(layer);
-    }
-}
-
-function dehighlightZp(layer) {
-    if (selected === null || selected._leaflet_id !== layer._leaflet_id) {
-        zp.resetStyle(layer);
-    }
-}
-
-function dehighlightSpas(layer) {
-    if (selected === null || selected._leaflet_id !== layer._leaflet_id) {
-        spas.resetStyle(layer);
-    }
-}
-
-function dehighlightPscis(layer) {
-    if (selected === null || selected._leaflet_id !== layer._leaflet_id) {
-        pscis.resetStyle(layer);
-    }
-}
-
-function dehighlightRez(layer) {
-    if (selected === null || selected._leaflet_id !== layer._leaflet_id) {
-        rez.resetStyle(layer);
     }
 }
 
@@ -110,7 +93,7 @@ function onEachFeatureIwc(feature, layer) {
             highlight(e.target);
         },
         'mouseout': function (e) {
-            dehighlightIwc(e.target);
+            dehighlight(e.target, 'iwc');
         },
         'click tap': function (e) {
             select(e.target);
@@ -132,7 +115,7 @@ function onEachFeaturePil(feature, layer) {
             highlight(e.target);
         },
         'mouseout': function (e) {
-            dehighlightPil(e.target);
+            dehighlight(e.target, 'pil');
         },
         'click tap': function (e) {
             select(e.target);
@@ -154,7 +137,7 @@ function onEachFeatureZp(feature, layer) {
             highlight(e.target);
         },
         'mouseout': function (e) {
-            dehighlightZp(e.target);
+            dehighlight(e.target, 'zp');
         },
         'click tap': function (e) {
             select(e.target);
@@ -176,7 +159,7 @@ function onEachFeatureSpas(feature, layer) {
             highlight(e.target);
         },
         'mouseout': function (e) {
-            dehighlightSpas(e.target);
+            dehighlight(e.target, 'spas');
         },
         'click tap': function (e) {
             select(e.target);
@@ -198,7 +181,7 @@ function onEachFeaturePscis(feature, layer) {
             highlight(e.target);
         },
         'mouseout': function (e) {
-            dehighlightPscis(e.target);
+            dehighlight(e.target, 'pscis');
         },
         'click tap': function (e) {
             select(e.target);
@@ -220,7 +203,7 @@ function onEachFeatureRez(feature, layer) {
             highlight(e.target);
         },
         'mouseout': function (e) {
-            dehighlightRez(e.target);
+            dehighlight(e.target, 'rez');
         },
         'click tap': function (e) {
             select(e.target);
