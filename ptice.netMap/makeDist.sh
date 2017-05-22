@@ -1,3 +1,4 @@
+#!/bin/bash
 cat js/Leaflet.fullscreen.js js/styledLayerControl.min.js js/Control.Geocoder.js > js/includes.js
 cat css/leaflet.fullscreen.css css/styledLayerControl.css css/Control.Geocoder.css > css/includes.css
 
