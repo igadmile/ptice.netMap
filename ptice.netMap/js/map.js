@@ -390,8 +390,7 @@ if (params.layers && params.feat) {
     boundsParams = {
         maxZoom: 17
     }
-    var featureCoordinates = layers[0]._layers[params.feat]._latlngs;
-    console.log(featureCoordinates)
+    var featureCoordinates = layers[0]._layers[params.feat];
     layers[0]._layers[params.feat].fire('click', {
         latlng: featureCoordinates[Math.round((featureCoordinates.length) / 2)]
     });
