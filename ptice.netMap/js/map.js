@@ -1,21 +1,44 @@
-var attrib = 'Kartu izradila <a href="http://www.biom.hr/">Udruga BIOM</a> u sklopu projekta Ptice oko nas';
-var attrib2 = 'Kartu izradila <a href="http://www.biom.hr/">Udruga BIOM</a> u sklopu projekta Ptice oko nas. Podloge <a href="http://www.dgu.hr/">Državne Geodetske uprave</a>';
+var attrib = 'Kartu izradila <a href="http://www.biom.hr/">Udruga BIOM</a> u sklopu projekta Ptice oko nas',
+    attrib2 = 'Kartu izradila <a href="http://www.biom.hr/">Udruga BIOM</a> u sklopu projekta Ptice oko nas. Podloge <a href="http://www.dgu.hr/">Državne Geodetske uprave</a>',
+    basemap_0 = L.tileLayer.wms('http://geoportal.dgu.hr/wms', {
+        layers: 'DOF',
+        format: 'image/jpeg',
+        attribution: attrib2
+    }),
+    basemap_1 = L.tileLayer.wms('http://geoportal.dgu.hr/wms', {
+        layers: 'TK25',
+        format: 'image/jpeg',
+        attribution: attrib2
+    }),
+    basemap_2 = L.tileLayer('https://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=f13946a5090e4a73aded2506761ae4eb', {
+        attribution: attrib
+    }),
+    selected = null,
+    iwc = new L.geoJson(exp_iwc, {
+        onEachFeature: onEachFeatureIwc,
+        style: doStyleiwc
+    }),
+    piljIlas = new L.geoJson(exp_piljIlas, {
+        onEachFeature: onEachFeaturePil,
+        style: doStylepiljIlas
+    }),
+    zp = new L.geoJson(exp_zps, {
+        onEachFeature: onEachFeatureZp,
+        style: doStyleZp
+    }),
+    spas = new L.geoJson(exp_spas, {
+        onEachFeature: onEachFeatureSpas,
+        style: doStyleSpas
+    }),
+    pscis = new L.geoJson(exp_pscis, {
+        onEachFeature: onEachFeaturePscis,
+        style: doStylePscis
+    }),
+    rez = new L.geoJson(exp_rez, {
+        onEachFeature: onEachFeatureRez,
+        style: doStyleRez
+    });
 
-var basemap_0 = L.tileLayer.wms('http://geoportal.dgu.hr/wms', {
-    layers: 'DOF',
-    format: 'image/jpeg',
-    attribution: attrib2
-});
-
-var basemap_1 = L.tileLayer.wms('http://geoportal.dgu.hr/wms', {
-    layers: 'TK25',
-    format: 'image/jpeg',
-    attribution: attrib2
-});
-
-var basemap_2 = L.tileLayer('https://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=f13946a5090e4a73aded2506761ae4eb', {
-    attribution: attrib
-});
 
 //dodavanje fucnkcije za promijenu boje
 function highlight(layer) {
@@ -64,8 +87,6 @@ function dehighlightRez(layer) {
         rez.resetStyle(layer);
     }
 }
-
-var selected = null;
 
 function select(layer) {
     // See if there is already a selection
@@ -226,11 +247,6 @@ function doStyleiwc(feature) {
     };
 }
 
-var iwc = new L.geoJson(exp_iwc, {
-    onEachFeature: onEachFeatureIwc,
-    style: doStyleiwc
-});
-
 function doStylepiljIlas(feature) {
     return {
         weight: '1.3',
@@ -241,11 +257,6 @@ function doStylepiljIlas(feature) {
         fillOpacity: '0',
     };
 }
-
-var piljIlas = new L.geoJson(exp_piljIlas, {
-    onEachFeature: onEachFeaturePil,
-    style: doStylepiljIlas
-});
 
 function doStyleZp(feature) {
     return {
@@ -258,11 +269,6 @@ function doStyleZp(feature) {
     };
 }
 
-var zp = new L.geoJson(exp_zps, {
-    onEachFeature: onEachFeatureZp,
-    style: doStyleZp
-});
-
 function doStyleSpas(feature) {
     return {
         weight: '1.3',
@@ -273,11 +279,6 @@ function doStyleSpas(feature) {
         fillOpacity: '0.3',
     };
 }
-
-var spas = new L.geoJson(exp_spas, {
-    onEachFeature: onEachFeatureSpas,
-    style: doStyleSpas
-});
 
 function doStylePscis(feature) {
     return {
@@ -290,11 +291,6 @@ function doStylePscis(feature) {
     };
 }
 
-var pscis = new L.geoJson(exp_pscis, {
-    onEachFeature: onEachFeaturePscis,
-    style: doStylePscis
-});
-
 function doStyleRez(feature) {
     return {
         weight: '1.3',
@@ -305,23 +301,6 @@ function doStyleRez(feature) {
         fillOpacity: '0.3',
     };
 }
-
-var rez = new L.geoJson(exp_rez, {
-    onEachFeature: onEachFeatureRez,
-    style: doStyleRez
-});
-
-var baseMaps = [
-    {
-        groupName: "Pozadinske karte",
-        expanded: true,
-        layers: {
-            'Thunderforest Landscape': basemap_2,
-            'TK25': basemap_1,
-            'Digitalni ortofoto': basemap_0
-        }
-    }
-];
 
 var baseMaps = [
     {
