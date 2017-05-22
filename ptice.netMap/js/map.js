@@ -1,3 +1,4 @@
+/*eslint quotes: ["error", "single"]*/
 var attrib = 'Kartu izradila <a href="http://www.biom.hr/">Udruga BIOM</a> u sklopu projekta Ptice oko nas',
     attrib2 = 'Kartu izradila <a href="http://www.biom.hr/">Udruga BIOM</a> u sklopu projekta Ptice oko nas. Podloge <a href="http://www.dgu.hr/">Državne Geodetske uprave</a>',
     basemap0 = L.tileLayer.wms('http://geoportal.dgu.hr/wms', {
@@ -257,7 +258,7 @@ var iwc = new L.geoJson(exp_iwc, {
 
 var baseMaps = [
     {
-        groupName: "Pozadinske karte",
+        groupName: 'Pozadinske karte',
         expanded: true,
         layers: {
             'Thunderforest Landscape': basemap2,
@@ -269,21 +270,21 @@ var baseMaps = [
 
 var overlays2 = [
     {
-        groupName: "Zaštićena područja",
+        groupName: 'Zaštićena područja',
         expanded: true,
         layers: {
-            "Ornitološki rezervati": rez,
-            "Zaštićena područja u RH": zp,
-            "Područja značajna za očuvanje divljih ptica": spas,
-            "Područja značajna za očuvanje drugih divljih vrsta i njihovih staništa": pscis
+            'Ornitološki rezervati': rez,
+            'Zaštićena područja u RH': zp,
+            'Područja značajna za očuvanje divljih ptica': spas,
+            'Područja značajna za očuvanje drugih divljih vrsta i njihovih staništa': pscis
         }
     },
     {
-        groupName: "Istraživanja ptica",
+        groupName: 'Istraživanja ptica',
         expanded: true,
         layers: {
-            "Lokaliteti za zimsko prebrojavanje ptica": iwc,
-            "Kvadranti za monitoring piljaka i lastavica": pil
+            'Lokaliteti za zimsko prebrojavanje ptica': iwc,
+            'Kvadranti za monitoring piljaka i lastavica': pil
         }
     }
 ];
@@ -327,7 +328,7 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
     L.Control.styledLayerControl(baseMaps, overlays2, {
         collapsed: true
     }).addTo(map);
-} else if (document.getElementById("map").offsetWidth < 1025) {
+} else if (document.getElementById('map').offsetWidth < 1025) {
     L.Control.styledLayerControl(baseMaps, overlays2, {
         collapsed: true
     }).addTo(map);
@@ -348,8 +349,8 @@ if (params.layers && params.feat) {
 }
 // addTomap initializations
 L.Control.geocoder({
-    position: "topleft",
-    placeholder: "Traži..."
+    position: 'topleft',
+    placeholder: 'Traži...'
 }).addTo(map);
 baseLayer.addTo(map);
 L.control.scale({
