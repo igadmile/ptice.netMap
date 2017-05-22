@@ -13,31 +13,7 @@ var attrib = 'Kartu izradila <a href="http://www.biom.hr/">Udruga BIOM</a> u skl
     basemap2 = L.tileLayer('https://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=f13946a5090e4a73aded2506761ae4eb', {
         attribution: attrib
     }),
-    selected = null,
-    iwc = new L.geoJson(exp_iwc, {
-        onEachFeature: onEachFeatureIwc,
-        style: doStyleiwc
-    }),
-    piljIlas = new L.geoJson(exp_piljIlas, {
-        onEachFeature: onEachFeaturePil,
-        style: doStylepiljIlas
-    }),
-    zp = new L.geoJson(exp_zps, {
-        onEachFeature: onEachFeatureZp,
-        style: doStyleZp
-    }),
-    spas = new L.geoJson(exp_spas, {
-        onEachFeature: onEachFeatureSpas,
-        style: doStyleSpas
-    }),
-    pscis = new L.geoJson(exp_pscis, {
-        onEachFeature: onEachFeaturePscis,
-        style: doStylePscis
-    }),
-    rez = new L.geoJson(exp_rez, {
-        onEachFeature: onEachFeatureRez,
-        style: doStyleRez
-    });
+    selected = null;
 
 //dodavanje fucnkcije za promijenu boje
 function highlight(layer) {
@@ -56,7 +32,7 @@ function dehighlight(layer, layerName) {
         if (layerName === 'iwc') {
             iwc.resetStyle(layer);
         } else if (layerName === 'pil') {
-            piljIlas.resetStyle(layer);
+            pil.resetStyle(layer);
         } else if (layerName === 'zp') {
             zp.resetStyle(layer);
         } else if (layerName === 'spas') {
@@ -88,7 +64,7 @@ function onEachFeatureIwc(feature, layer) {
         },
         popupclose: function (e) {
             selected = null;
-            iwc.resetStyle(e.target);
+            dehighlight(e.target, 'iwc');
         }
     });
     var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Tip lokaliteta</th><td>' + feature.properties.t + '</td></tr></table>';
@@ -110,7 +86,7 @@ function onEachFeaturePil(feature, layer) {
         },
         popupclose: function (e) {
             selected = null;
-            piljIlas.resetStyle(e.target);
+            dehighlight(e.target, 'pil');
         }
     });
     var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Županija</th><td>' + feature.properties.z + '</td></tr></table>';
@@ -132,7 +108,7 @@ function onEachFeatureZp(feature, layer) {
         },
         popupclose: function (e) {
             selected = null;
-            zp.resetStyle(e.target);
+            dehighlight(e.target, 'zp');
         }
     });
     var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Kategorija zaštite</th><td>' + feature.properties.kat + '</td></tr><tr><th scope="row">Potkategorija zaštite</th><td>' + feature.properties.pkat + '</td></tr><tr><th scope="row">Kategorija zaštite na engleskom jeziku</th><td>' + feature.properties.kateng + '</td></tr><tr><th scope="row">Kategorija zaštite prema IUCN-u</th><td>' + feature.properties.i + '</td></tr><tr><th scope="row">Zaštita proglašena godine</th><td>' + feature.properties.g + '</td></tr></table>';
@@ -154,7 +130,7 @@ function onEachFeatureSpas(feature, layer) {
         },
         popupclose: function (e) {
             selected = null;
-            spas.resetStyle(e.target);
+            dehighlight(e.target, 'spas');
         }
     });
     var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Kod područja</th><td>' + feature.properties.k + '</td></tr><tr><th scope="row">Dodatne informacije</th><td><a href=' + feature.properties.u + feature.properties.k + '>SDF obrazac</a></td></tr></table>';
@@ -176,7 +152,7 @@ function onEachFeaturePscis(feature, layer) {
         },
         popupclose: function (e) {
             selected = null;
-            pscis.resetStyle(e.target);
+            dehighlight(e.target, 'pscis');
         }
     });
     var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Kod područja</th><td>' + feature.properties.k + '</td></tr><tr><th scope="row">Dodatne informacije</th><td><a href=' + feature.properties.u + feature.properties.k + '>SDF obrazac</a></td></tr></table>';
@@ -198,7 +174,7 @@ function onEachFeatureRez(feature, layer) {
         },
         popupclose: function (e) {
             selected = null;
-            rez.resetStyle(e.target);
+            dehighlight(e.target, 'rez');
         }
     });
     var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Osnovne informacije</th><td>' + feature.properties.in + '</td></tr><tr><th scope="row">Tip rezervata</th><td>' + feature.properties.pkat + '</td></tr><tr><th scope="row">Županija</th><td>' + feature.properties.z + '</td></tr><tr><th scope="row">Općina</th><td>' + feature.properties.o + '</td></tr><tr><th scope="row">Zaštita proglašena</th><td>' + feature.properties.g + '</td></tr><tr><th scope="row">Površina (Ha)</th><td>' + feature.properties.p + '</td></tr></table>';
@@ -206,7 +182,7 @@ function onEachFeatureRez(feature, layer) {
     layer._leaflet_id = feature.properties.n;
 }
 
-function doStyleiwc(feature) {
+function doStyleIwc(feature) {
     return {
         fillColor: '#e11f66',
         color: '#e31a1c',
@@ -216,7 +192,7 @@ function doStyleiwc(feature) {
     };
 }
 
-function doStylepiljIlas(feature) {
+function doStylePil(feature) {
     return {
         fillColor: '#e11f66',
         color: '#e31a1c',
@@ -266,6 +242,31 @@ function doStyleRez(feature) {
     };
 }
 
+var iwc = new L.geoJson(exp_iwc, {
+        onEachFeature: onEachFeatureIwc,
+        style: doStyleIwc
+    }),
+    pil = new L.geoJson(exp_piljIlas, {
+        onEachFeature: onEachFeaturePil,
+        style: doStylePil
+    }),
+    zp = new L.geoJson(exp_zps, {
+        onEachFeature: onEachFeatureZp,
+        style: doStyleZp
+    }),
+    spas = new L.geoJson(exp_spas, {
+        onEachFeature: onEachFeatureSpas,
+        style: doStyleSpas
+    }),
+    pscis = new L.geoJson(exp_pscis, {
+        onEachFeature: onEachFeaturePscis,
+        style: doStylePscis
+    }),
+    rez = new L.geoJson(exp_rez, {
+        onEachFeature: onEachFeatureRez,
+        style: doStyleRez
+    });
+
 var baseMaps = [
     {
         groupName: "Pozadinske karte",
@@ -294,7 +295,7 @@ var overlays2 = [
         expanded: true,
         layers: {
             "Lokaliteti za zimsko prebrojavanje ptica": iwc,
-            "Kvadranti za monitoring piljaka i lastavica": piljIlas
+            "Kvadranti za monitoring piljaka i lastavica": pil
         }
     }
 ];
@@ -318,7 +319,7 @@ if (params.layers) {
             spas: spas,
             pscis: pscis,
             iwc: iwc,
-            piljIlas: piljIlas
+            pil: pil
         },
         layers = params.layers.split(',').map(function (item) {
             return overlays[item];
