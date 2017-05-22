@@ -1,16 +1,16 @@
 var attrib = 'Kartu izradila <a href="http://www.biom.hr/">Udruga BIOM</a> u sklopu projekta Ptice oko nas',
     attrib2 = 'Kartu izradila <a href="http://www.biom.hr/">Udruga BIOM</a> u sklopu projekta Ptice oko nas. Podloge <a href="http://www.dgu.hr/">Državne Geodetske uprave</a>',
-    basemap_0 = L.tileLayer.wms('http://geoportal.dgu.hr/wms', {
+    basemap0 = L.tileLayer.wms('http://geoportal.dgu.hr/wms', {
         layers: 'DOF',
         format: 'image/jpeg',
         attribution: attrib2
     }),
-    basemap_1 = L.tileLayer.wms('http://geoportal.dgu.hr/wms', {
+    basemap1 = L.tileLayer.wms('http://geoportal.dgu.hr/wms', {
         layers: 'TK25',
         format: 'image/jpeg',
         attribution: attrib2
     }),
-    basemap_2 = L.tileLayer('https://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=f13946a5090e4a73aded2506761ae4eb', {
+    basemap2 = L.tileLayer('https://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=f13946a5090e4a73aded2506761ae4eb', {
         attribution: attrib
     }),
     selected = null,
@@ -271,9 +271,9 @@ var baseMaps = [
         groupName: "Pozadinske karte",
         expanded: true,
         layers: {
-            'Thunderforest Landscape': basemap_2,
-            'TK25': basemap_1,
-            'Digitalni ortofoto': basemap_0
+            'Thunderforest Landscape': basemap2,
+            'TK25': basemap1,
+            'Digitalni ortofoto': basemap0
         }
     }
 ];
@@ -301,9 +301,9 @@ var overlays2 = [
 
 /*
 var base = {
-    "osm":basemap_2,
-    "tk25":basemap_1,
-    "dof":basemap_0
+    "osm":basemap2,
+    "tk25":basemap1,
+    "dof":basemap0
 }*/
 
 // var baseLayer = (base[params.base]) ? [base[params.base]] : [base.Topographic];
@@ -364,7 +364,7 @@ L.Control.geocoder({
     position: "topleft",
     placeholder: "Traži..."
 }).addTo(map);
-basemap_2.addTo(map);
+basemap2.addTo(map);
 L.control.scale({
     options: {
         position: 'bottomleft',
