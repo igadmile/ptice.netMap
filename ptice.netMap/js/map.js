@@ -29,157 +29,12 @@ function highlight(layer) {
 //dodavanje fucnkcije za vraćanje boje na staro
 function dehighlight(layer, layerName) {
     if (selected === null || selected._leaflet_id !== layer._leaflet_id) {
-        if (layerName === 'iwc') {
-            iwc.resetStyle(layer);
-        } else if (layerName === 'pil') {
-            pil.resetStyle(layer);
-        } else if (layerName === 'zp') {
-            zp.resetStyle(layer);
-        } else if (layerName === 'spas') {
-            spas.resetStyle(layer);
-        } else if (layerName === 'pscis') {
-            pscis.resetStyle(layer);
-        } else if (layerName === 'rez') {
-            rez.resetStyle(layer);
-        }
+        layer.setStyle(layerName);
     }
 }
 
 function select(layer) {
     selected = layer;
-}
-
-//onEachFeature funkcije
-function onEachFeatureIwc(feature, layer) {
-    layer.on({
-        mouseover: function (e) {
-            highlight(e.target);
-        },
-        mouseout: function (e) {
-            dehighlight(e.target, 'iwc');
-        },
-        click: function (e) {
-            select(e.target);
-            highlight(e.target);
-        },
-        popupclose: function (e) {
-            selected = null;
-            dehighlight(e.target, 'iwc');
-        }
-    });
-    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Tip lokaliteta</th><td>' + feature.properties.t + '</td></tr></table>';
-    layer.bindPopup(popupContent);
-    layer._leaflet_id = feature.properties.n;
-}
-
-function onEachFeaturePil(feature, layer) {
-    layer.on({
-        mouseover: function (e) {
-            highlight(e.target);
-        },
-        mouseout: function (e) {
-            dehighlight(e.target, 'pil');
-        },
-        click: function (e) {
-            select(e.target);
-            highlight(e.target);
-        },
-        popupclose: function (e) {
-            selected = null;
-            dehighlight(e.target, 'pil');
-        }
-    });
-    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Županija</th><td>' + feature.properties.z + '</td></tr></table>';
-    layer.bindPopup(popupContent);
-    layer._leaflet_id = feature.properties.n;
-}
-
-function onEachFeatureZp(feature, layer) {
-    layer.on({
-        mouseover: function (e) {
-            highlight(e.target);
-        },
-        mouseout: function (e) {
-            dehighlight(e.target, 'zp');
-        },
-        click: function (e) {
-            select(e.target);
-            highlight(e.target);
-        },
-        popupclose: function (e) {
-            selected = null;
-            dehighlight(e.target, 'zp');
-        }
-    });
-    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Kategorija zaštite</th><td>' + feature.properties.kat + '</td></tr><tr><th scope="row">Potkategorija zaštite</th><td>' + feature.properties.pkat + '</td></tr><tr><th scope="row">Kategorija zaštite na engleskom jeziku</th><td>' + feature.properties.kateng + '</td></tr><tr><th scope="row">Kategorija zaštite prema IUCN-u</th><td>' + feature.properties.i + '</td></tr><tr><th scope="row">Zaštita proglašena godine</th><td>' + feature.properties.g + '</td></tr></table>';
-    layer.bindPopup(popupContent);
-    layer._leaflet_id = feature.properties.n;
-}
-
-function onEachFeatureSpas(feature, layer) {
-    layer.on({
-        mouseover: function (e) {
-            highlight(e.target);
-        },
-        mouseout: function (e) {
-            dehighlight(e.target, 'spas');
-        },
-        click: function (e) {
-            select(e.target);
-            highlight(e.target);
-        },
-        popupclose: function (e) {
-            selected = null;
-            dehighlight(e.target, 'spas');
-        }
-    });
-    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Kod područja</th><td>' + feature.properties.k + '</td></tr><tr><th scope="row">Dodatne informacije</th><td><a href=' + feature.properties.u + feature.properties.k + '>SDF obrazac</a></td></tr></table>';
-    layer.bindPopup(popupContent);
-    layer._leaflet_id = feature.properties.n;
-}
-
-function onEachFeaturePscis(feature, layer) {
-    layer.on({
-        mouseover: function (e) {
-            highlight(e.target);
-        },
-        mouseout: function (e) {
-            dehighlight(e.target, 'pscis');
-        },
-        click: function (e) {
-            select(e.target);
-            highlight(e.target);
-        },
-        popupclose: function (e) {
-            selected = null;
-            dehighlight(e.target, 'pscis');
-        }
-    });
-    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Kod područja</th><td>' + feature.properties.k + '</td></tr><tr><th scope="row">Dodatne informacije</th><td><a href=' + feature.properties.u + feature.properties.k + '>SDF obrazac</a></td></tr></table>';
-    layer.bindPopup(popupContent);
-    layer._leaflet_id = feature.properties.n;
-}
-
-function onEachFeatureRez(feature, layer) {
-    layer.on({
-        mouseover: function (e) {
-            highlight(e.target);
-        },
-        mouseout: function (e) {
-            dehighlight(e.target, 'rez');
-        },
-        click: function (e) {
-            select(e.target);
-            highlight(e.target);
-        },
-        popupclose: function (e) {
-            selected = null;
-            dehighlight(e.target, 'rez');
-        }
-    });
-    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Osnovne informacije</th><td>' + feature.properties.in + '</td></tr><tr><th scope="row">Tip rezervata</th><td>' + feature.properties.pkat + '</td></tr><tr><th scope="row">Županija</th><td>' + feature.properties.z + '</td></tr><tr><th scope="row">Općina</th><td>' + feature.properties.o + '</td></tr><tr><th scope="row">Zaštita proglašena</th><td>' + feature.properties.g + '</td></tr><tr><th scope="row">Površina (Ha)</th><td>' + feature.properties.p + '</td></tr></table>';
-    layer.bindPopup(popupContent);
-    layer._leaflet_id = feature.properties.n;
 }
 
 function doStyleIwc(feature) {
@@ -240,6 +95,139 @@ function doStyleRez(feature) {
         opacity: '1.0',
         fillOpacity: '0.3'
     };
+}
+
+//onEachFeature funkcije
+function onEachFeatureIwc(feature, layer) {
+    layer.on({
+        mouseover: function (e) {
+            highlight(e.target);
+        },
+        mouseout: function (e) {
+            dehighlight(e.target, doStyleIwc(e.target));
+        },
+        click: function (e) {
+            select(e.target);
+            highlight(e.target);
+        },
+        popupclose: function (e) {
+            selected = null;
+            dehighlight(e.target, doStyleIwc(e.target));
+        }
+    });
+    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Tip lokaliteta</th><td>' + feature.properties.t + '</td></tr></table>';
+    layer.bindPopup(popupContent);
+    layer._leaflet_id = feature.properties.n;
+}
+
+function onEachFeaturePil(feature, layer) {
+    layer.on({
+        mouseover: function (e) {
+            highlight(e.target);
+        },
+        mouseout: function (e) {
+            dehighlight(e.target, doStylePil(e.target));
+        },
+        click: function (e) {
+            select(e.target);
+            highlight(e.target);
+        },
+        popupclose: function (e) {
+            selected = null;
+            dehighlight(e.target, doStylePil(e.target));
+        }
+    });
+    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Županija</th><td>' + feature.properties.z + '</td></tr></table>';
+    layer.bindPopup(popupContent);
+    layer._leaflet_id = feature.properties.n;
+}
+
+function onEachFeatureZp(feature, layer) {
+    layer.on({
+        mouseover: function (e) {
+            highlight(e.target);
+        },
+        mouseout: function (e) {
+            dehighlight(e.target, doStyleZp(e.target));
+        },
+        click: function (e) {
+            select(e.target);
+            highlight(e.target);
+        },
+        popupclose: function (e) {
+            selected = null;
+            dehighlight(e.target, doStyleZp(e.target));
+        }
+    });
+    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Kategorija zaštite</th><td>' + feature.properties.kat + '</td></tr><tr><th scope="row">Potkategorija zaštite</th><td>' + feature.properties.pkat + '</td></tr><tr><th scope="row">Kategorija zaštite na engleskom jeziku</th><td>' + feature.properties.kateng + '</td></tr><tr><th scope="row">Kategorija zaštite prema IUCN-u</th><td>' + feature.properties.i + '</td></tr><tr><th scope="row">Zaštita proglašena godine</th><td>' + feature.properties.g + '</td></tr></table>';
+    layer.bindPopup(popupContent);
+    layer._leaflet_id = feature.properties.n;
+}
+
+function onEachFeatureSpas(feature, layer) {
+    layer.on({
+        mouseover: function (e) {
+            highlight(e.target);
+        },
+        mouseout: function (e) {
+            dehighlight(e.target, doStyleSpas(e.target));
+        },
+        click: function (e) {
+            select(e.target);
+            highlight(e.target);
+        },
+        popupclose: function (e) {
+            selected = null;
+            dehighlight(e.target, doStyleSpas(e.target));
+        }
+    });
+    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Kod područja</th><td>' + feature.properties.k + '</td></tr><tr><th scope="row">Dodatne informacije</th><td><a href=' + feature.properties.u + feature.properties.k + '>SDF obrazac</a></td></tr></table>';
+    layer.bindPopup(popupContent);
+    layer._leaflet_id = feature.properties.n;
+}
+
+function onEachFeaturePscis(feature, layer) {
+    layer.on({
+        mouseover: function (e) {
+            highlight(e.target);
+        },
+        mouseout: function (e) {
+            dehighlight(e.target, doStylePscis(e.target));
+        },
+        click: function (e) {
+            select(e.target);
+            highlight(e.target);
+        },
+        popupclose: function (e) {
+            selected = null;
+            dehighlight(e.target, doStylePscis(e.target));
+        }
+    });
+    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Kod područja</th><td>' + feature.properties.k + '</td></tr><tr><th scope="row">Dodatne informacije</th><td><a href=' + feature.properties.u + feature.properties.k + '>SDF obrazac</a></td></tr></table>';
+    layer.bindPopup(popupContent);
+    layer._leaflet_id = feature.properties.n;
+}
+
+function onEachFeatureRez(feature, layer) {
+    layer.on({
+        mouseover: function (e) {
+            highlight(e.target);
+        },
+        mouseout: function (e) {
+            dehighlight(e.target, doStyleRez(e.target));
+        },
+        click: function (e) {
+            select(e.target);
+            highlight(e.target);
+        },
+        popupclose: function (e) {
+            selected = null;
+            dehighlight(e.target, doStyleRez(e.target));
+        }
+    });
+    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Osnovne informacije</th><td>' + feature.properties.in + '</td></tr><tr><th scope="row">Tip rezervata</th><td>' + feature.properties.pkat + '</td></tr><tr><th scope="row">Županija</th><td>' + feature.properties.z + '</td></tr><tr><th scope="row">Općina</th><td>' + feature.properties.o + '</td></tr><tr><th scope="row">Zaštita proglašena</th><td>' + feature.properties.g + '</td></tr><tr><th scope="row">Površina (Ha)</th><td>' + feature.properties.p + '</td></tr></table>';
+    layer.bindPopup(popupContent);
+    layer._leaflet_id = feature.properties.n;
 }
 
 var iwc = new L.geoJson(exp_iwc, {
