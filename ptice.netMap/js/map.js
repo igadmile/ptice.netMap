@@ -182,7 +182,7 @@ function onEachFeatureSpas(feature, layer) {
             dehighlight(e.target, doStyleSpas(e.target));
         }
     });
-    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Kod područja</th><td>' + feature.properties.k + '</td></tr><tr><th scope="row">Dodatne informacije</th><td><a href=' + feature.properties.u + feature.properties.k + '>SDF obrazac</a></td></tr></table>';
+    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Kod područja</th><td>' + feature.properties.k + '</td></tr><tr><th scope="row">Dodatne informacije</th><td><a target="_blank" href=' + feature.properties.u + feature.properties.k + '>SDF obrazac</a></td></tr></table>';
     layer.bindPopup(popupContent);
     layer._leaflet_id = feature.properties.n;
 }
@@ -204,7 +204,7 @@ function onEachFeaturePscis(feature, layer) {
             dehighlight(e.target, doStylePscis(e.target));
         }
     });
-    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Kod područja</th><td>' + feature.properties.k + '</td></tr><tr><th scope="row">Dodatne informacije</th><td><a href=' + feature.properties.u + feature.properties.k + '>SDF obrazac</a></td></tr></table>';
+    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Kod područja</th><td>' + feature.properties.k + '</td></tr><tr><th scope="row">Dodatne informacije</th><td><a target="_blank" href=' + feature.properties.u + feature.properties.k + '>SDF obrazac</a></td></tr></table>';
     layer.bindPopup(popupContent);
     layer._leaflet_id = feature.properties.n;
 }
