@@ -325,8 +325,7 @@ var map = L.map('map', {
 });
 
 // check if mobile or desktop and load elevation profile and controls accordingly
-if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-    document.getElementById('map').offsetWidth < 1025) {
+if (document.getElementById('map').offsetWidth < 1025) {
     L.Control.styledLayerControl(baseMaps, overlays2, {
         collapsed: true
     }).addTo(map);
