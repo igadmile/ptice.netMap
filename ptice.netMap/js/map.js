@@ -325,12 +325,8 @@ var map = L.map('map', {
 });
 
 // check if mobile or desktop and load elevation profile and controls accordingly
-if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-    L.control.locate().addTo(map);
-    L.Control.styledLayerControl(baseMaps, overlays2, {
-        collapsed: true
-    }).addTo(map);
-} else if (document.getElementById('map').offsetWidth < 1025) {
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+    document.getElementById('map').offsetWidth < 1025) {
     L.Control.styledLayerControl(baseMaps, overlays2, {
         collapsed: true
     }).addTo(map);
@@ -340,7 +336,7 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
     }).addTo(map);
 }
 if (params.layers && params.feat) {
-    boundsParams = {
+    var boundsParams = {
         maxZoom: 17
     };
     var featureCoordinates = layers[0]._layers[params.feat];
