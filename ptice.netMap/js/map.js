@@ -299,20 +299,22 @@ var base = {
         tk25: basemap1,
         dof: basemap0
     },
-    baseLayer = params.base ? base[params.base] : base.osm;
+    baseLayer = params.base ? base[params.base] : base.osm,
+    overlays,
+    layers;
 
 if (params.layers) {
-    var overlays = {
-            rez: rez,
-            zp: zp,
-            spas: spas,
-            pscis: pscis,
-            iwc: iwc,
-            pil: pil
-        },
-        layers = params.layers.split(',').map(function (item) {
-            return overlays[item];
-        });
+    overlays = {
+        rez: rez,
+        zp: zp,
+        spas: spas,
+        pscis: pscis,
+        iwc: iwc,
+        pil: pil
+    };
+    layers = params.layers.split(',').map(function (item) {
+        return overlays[item];
+    });
 }
 
 var map = L.map('map', {
