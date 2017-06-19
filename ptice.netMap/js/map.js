@@ -118,7 +118,7 @@ function onEachFeatureIwc(feature, layer) {
     });
     var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Tip lokaliteta</th><td>' + feature.properties.t + '</td></tr></table>';
     layer.bindPopup(popupContent);
-    layer._leaflet_id = feature.properties.n;
+    //    layer._leaflet_id = feature.properties.n;
 }
 
 function onEachFeaturePil(feature, layer) {
@@ -184,7 +184,7 @@ function onEachFeatureSpas(feature, layer) {
     });
     var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Kod područja</th><td>' + feature.properties.k + '</td></tr><tr><th scope="row">Dodatne informacije</th><td><a target="_blank" href=' + feature.properties.u + feature.properties.k + '>SDF obrazac</a></td></tr></table>';
     layer.bindPopup(popupContent);
-    layer._leaflet_id = feature.properties.n;
+    layer._leaflet_id = 'spas' + feature.properties.n;
 }
 
 function onEachFeaturePscis(feature, layer) {
@@ -206,7 +206,7 @@ function onEachFeaturePscis(feature, layer) {
     });
     var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Kod područja</th><td>' + feature.properties.k + '</td></tr><tr><th scope="row">Dodatne informacije</th><td><a target="_blank" href=' + feature.properties.u + feature.properties.k + '>SDF obrazac</a></td></tr></table>';
     layer.bindPopup(popupContent);
-    layer._leaflet_id = feature.properties.n;
+    layer._leaflet_id = 'pscis' + feature.properties.n;
 }
 
 function onEachFeatureRez(feature, layer) {
@@ -321,7 +321,8 @@ var map = L.map('map', {
     center: [params.lat || 44.598, params.lng || 16.589],
     zoom: 7,
     fullscreenControl: true,
-    layers: layers || zp
+    layers: layers || zp,
+    preferCanvas: true
 });
 
 // check if mobile or desktop and load elevation profile and controls accordingly
