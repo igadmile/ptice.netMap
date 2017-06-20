@@ -6,19 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta charset="utf-8" />
     <!--css-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="css/includes.min.css" />
+    <link rel="stylesheet" href="css/leaflet-sidebar.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
     <link rel="stylesheet" type="text/css" href="css/own_style.css">
 
 </head>
 
-<body>
-    <div id="map"></div>
+<body ng-app="chooseLayers">
+    <div ng-controller="select" id="sidebar" class="sidebar collapsed">
+        <!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+            </ul>
+        </div>
+
+        <!-- Tab panes -->
+        <div class="sidebar-content">
+            <div class="sidebar-pane" id="home">
+                <h1 class="sidebar-header">
+                    sidebar-v2
+                    <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+                <form>
+                    <div class="form-group">
+                        <label>Odaberite sloj</label>
+                        <select class="form-control" ng-model="selectedLayer">
+                            <option ng-repeat="layer in layers">{{layer}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Odaberite poligon</label>
+                        <input type="text" ng-model="selectedFeature" uib-typeahead="feature for feature in features[selectedLayer] | filter:$viewValue" typeahead-show-hint="true" class="form-control" reqired> {{selectedLayer}}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="map" class="sidebar-map"></div>
     <!--javascript-->
-    <!--	<script>L_PREFER_CANVAS = true;</script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
+    <script src="js/angular/app/app.js"></script>
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
     <script src="js/includes.min.js"></script>
+    <script src="js/leaflet-sidebar.min.js"></script>
     <!--data-->
     <script src='data/data.js'></script>
     <script src='js/map.js'></script>

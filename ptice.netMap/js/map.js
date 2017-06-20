@@ -360,3 +360,4 @@ L.control.scale({
         updateWhenIdle: false
     }
 }).addTo(map);
+L.control.sidebar('sidebar').addTo(map);
