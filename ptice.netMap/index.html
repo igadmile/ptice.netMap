@@ -40,9 +40,18 @@
                     </div>
                     <div class="form-group">
                         <label>Odaberite poligon</label>
-                        <input type="text" ng-model="selectedFeature" uib-typeahead="feature for feature in features[selectedLayer] | filter:$viewValue" typeahead-show-hint="true" class="form-control" reqired> {{selectedLayer}}
+                        <input type="text" ng-model="selectedFeature" uib-typeahead="feature.properties.n for feature in features[selectedLayer] | filter:$viewValue" typeahead-show-hint="true" class="form-control" reqired>
                     </div>
                 </form>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <button ng-disabled="selectedFeature" ng-click="searchExpression(selectedLayer, selectedFeature)" type="submit" class="btn btn-default">Prikaži</button>
+                    </div>
+                    <div class="form-group">
+                        <button ng-click="genUrl(selectedLayer, selectedFeature)" type="submit" class="btn btn-default">Prikaži link</button>
+                    </div>
+                </form>
+                <div ng-show="urlReady" class="alert alert-success" role="alert">Vaš link je: {{urlReady}}</div>
             </div>
         </div>
     </div>

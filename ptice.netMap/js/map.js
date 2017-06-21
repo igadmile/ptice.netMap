@@ -118,7 +118,7 @@ function onEachFeatureIwc(feature, layer) {
     });
     var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Tip lokaliteta</th><td>' + feature.properties.t + '</td></tr></table>';
     layer.bindPopup(popupContent);
-    //    layer._leaflet_id = feature.properties.n;
+    layer._leaflet_id = feature.properties.n;
 }
 
 function onEachFeaturePil(feature, layer) {
@@ -300,10 +300,6 @@ var base = {
         dof: basemap0
     },
     baseLayer = params.base ? base[params.base] : base.osm,
-    overlays,
-    layers;
-
-if (params.layers) {
     overlays = {
         rez: rez,
         zp: zp,
@@ -311,7 +307,10 @@ if (params.layers) {
         pscis: pscis,
         iwc: iwc,
         pil: pil
-    };
+    },
+    layers;
+
+if (params.layers) {
     layers = params.layers.split(',').map(function (item) {
         return overlays[item];
     });
