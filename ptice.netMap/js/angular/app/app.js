@@ -56,7 +56,6 @@ angular.module('chooseLayers').controller('select', ['$scope', function ($scope)
     };
 
     $scope.genUrl = function (selectedLayer, selectedBase, selectedFeature) {
-        $scope.urlReady = '';
         if (!selectedFeature) {
             $scope.urlReady = 'http://karta.ptice.net?layers=' + selectedLayer + '&base=' + selectedBase;
         } else {
