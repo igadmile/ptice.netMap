@@ -47,6 +47,12 @@ body {
 .sidebar-tabs>ul>li.active {
     background-color: #27ae60;
 }
+a {
+    color: #27ae60;
+}
+a:hover {
+    color: #1f8a4c;
+}
 .spacer {
     margin-top: 20px;
 }

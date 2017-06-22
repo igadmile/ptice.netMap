@@ -61,7 +61,8 @@
                         <button ng-click="genUrl(selectedLayer, selectedBase, selectedFeature)" type="submit" class="btn btn-warning">Prikaži link</button>
                     </div>
                 </form>
-                <div ng-show="urlReady" class="alert alert-warning spacer" role="alert">Vaš link je: {{urlReady}}</div>
+                <div ng-show="urlReady" class="alert alert-warning spacer" role="alert">
+                    Vaš link je: <a ng-href="{{urlReady}}">{{urlReady}}</a></div>
             </div>
         </div>
     </div>
