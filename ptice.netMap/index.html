@@ -15,7 +15,7 @@
 </head>
 
 <body ng-app="chooseLayers">
-    <div ng-controller="select" id="sidebar" class="sidebar collapsed">
+    <div ng-controller="select" ng-hide="smallScreen" id="sidebar" class="sidebar collapsed" ng-cloak>
         <!-- Nav tabs -->
         <div class="sidebar-tabs">
             <ul role="tablist">
@@ -27,14 +27,25 @@
         <div class="sidebar-content">
             <div class="sidebar-pane" id="home">
                 <h1 class="sidebar-header">
-                    sidebar-v2
+                    Odabir slojeva i poligona
                     <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
+                <div class="alert alert-warning spacer" role="alert">
+                    Iz ovih izbornika možete odabrati pozadinsku kartu, sloj i/ili poligon iz odabranog sloja.
+                    <br>
+                    <br>Pritiskom na gump "Prikaži na karti", na karti će se prikazati odabrani poligon. Gumb će biti omogućen nakon što odaberete poligon iz odabranog sloja
+                    <br>
+                    <br>Pritiskom na gumb "Prikaži link", dobit će te link kojeg možete koristiti za prikazivanje odabranog sloja i/ili poligona pri učitavanju stranice.
+                </div>
                 <form>
                     <div class="form-group">
+                        <label>Odaberite pozadinsku kartu</label>
+                        <select class="form-control" ng-model="selectedBase" ng-options="selectedBase as baseLayer for (selectedBase, baseLayer) in baseLayers">
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label>Odaberite sloj</label>
-                        <select class="form-control" ng-model="selectedLayer">
-                            <option ng-repeat="layer in layers">{{layer}}</option>
+                        <select class="form-control" ng-options="selectedLayer as layer for (selectedLayer , layer) in layers" ng-model="selectedLayer" ng-change="resetFeature()">
                         </select>
                     </div>
                     <div class="form-group">
@@ -44,13 +55,13 @@
                 </form>
                 <form class="form-inline">
                     <div class="form-group">
-                        <button ng-disabled="!selectedFeature" ng-click="searchExpression(selectedLayer, selectedFeature)" type="submit" class="btn btn-default">Prikaži</button>
+                        <button ng-disabled="!selectedFeature" ng-click="searchExpression(selectedLayer, selectedBase, selectedFeature)" type="submit" class="btn btn-success">Prikaži na karti</button>
                     </div>
-                    <div class="form-group">
-                        <button ng-click="genUrl(selectedLayer, selectedFeature)" type="submit" class="btn btn-default">Prikaži link</button>
+                    <div class="form-group pull-right">
+                        <button ng-click="genUrl(selectedLayer, selectedBase, selectedFeature)" type="submit" class="btn btn-warning">Prikaži link</button>
                     </div>
                 </form>
-                <div ng-show="urlReady" class="alert alert-success" role="alert">Vaš link je: {{urlReady}}</div>
+                <div ng-show="urlReady" class="alert alert-warning spacer" role="alert">Vaš link je: {{urlReady}}</div>
             </div>
         </div>
     </div>

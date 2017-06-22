@@ -333,6 +333,7 @@ if (document.getElementById('map').offsetWidth < 1025) {
     L.Control.styledLayerControl(baseMaps, overlays2, {
         collapsed: false
     }).addTo(map);
+    L.control.sidebar('sidebar').addTo(map);
 }
 if (params.layers && params.feat) {
     var boundsParams = {
@@ -359,4 +360,3 @@ L.control.scale({
         updateWhenIdle: false
     }
 }).addTo(map);
-L.control.sidebar('sidebar').addTo(map);
