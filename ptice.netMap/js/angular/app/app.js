@@ -21,7 +21,7 @@ angular.module('chooseLayers').controller('select', ['$scope', function ($scope)
     };
 
     $scope.selectedLayer = 'zp';
-    $scope.selectedFeatures = undefined;
+    $scope.selectedFeature = undefined;
     $scope.searchExpression = function (selectedLayer, selectedFeature) {
         // remove all layers except baselayer which has ._globalTileRange
         map.eachLayer(function (layer) {
