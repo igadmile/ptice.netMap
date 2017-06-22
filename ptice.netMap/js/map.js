@@ -319,7 +319,6 @@ if (params.layers) {
 var map = L.map('map', {
     center: [params.lat || 44.598, params.lng || 16.589],
     zoom: 7,
-    fullscreenControl: true,
     layers: layers || zp,
     preferCanvas: true
 });
