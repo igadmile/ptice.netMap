@@ -53,6 +53,7 @@ angular.module('chooseLayers').controller('select', ['$scope', function ($scope)
             latlng: featureCoordinates[Math.round((featureCoordinates.length) / 2)]
         });
         map.fitBounds(overlays[selectedLayer]._layers[selectedFeature].getBounds(), boundsParams);
+        $scope.urlReady = undefined;
     };
 
     $scope.genUrl = function (selectedLayer, selectedBase, selectedFeature) {
