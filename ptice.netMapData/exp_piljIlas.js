@@ -503,4 +503,4 @@ var exp_piljIlas = {
 { "type": "Feature", "properties": { "n": "1kmE4844N2498", "z": "Sisačko-moslavačka županija" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 16.67767, 45.38331 ], [ 16.67876, 45.39228 ], [ 16.69147, 45.39147 ], [ 16.69038, 45.3825 ], [ 16.67767, 45.38331 ] ] ] } },
 { "type": "Feature", "properties": { "n": "1kmE4839N2501", "z": "Sisačko-moslavačka županija" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 16.61736, 45.41423 ], [ 16.61844, 45.4232 ], [ 16.63116, 45.4224 ], [ 16.63008, 45.41343 ], [ 16.61736, 45.41423 ] ] ] } }
 ]
-}
+};

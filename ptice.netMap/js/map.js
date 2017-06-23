@@ -160,7 +160,7 @@ function onEachFeatureZp(feature, layer) {
             dehighlight(e.target, doStyleZp(e.target));
         }
     });
-    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Kategorija zaštite</th><td>' + feature.properties.kat + '</td></tr><tr><th scope="row">Potkategorija zaštite</th><td>' + feature.properties.pkat + '</td></tr><tr><th scope="row">Kategorija zaštite na engleskom jeziku</th><td>' + feature.properties.kateng + '</td></tr><tr><th scope="row">Kategorija zaštite prema IUCN-u</th><td>' + feature.properties.i + '</td></tr><tr><th scope="row">Zaštita proglašena godine</th><td>' + feature.properties.g + '</td></tr></table>';
+    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Kategorija zaštite</th><td>' + feature.properties.kat + '</td></tr><tr><th scope="row">Potkategorija zaštite</th><td>' + feature.properties.pkat + '</td></tr><tr><th scope="row">Kategorija zaštite prema IUCN-u</th><td>' + feature.properties.i + '</td></tr><tr><th scope="row">Datum proglašenja zaštite</th><td>' + feature.properties.g + '</td></tr><tr><th scope="row">Ramsar područje</th><td>' + feature.properties.r + '</td></tr><tr><th scope="row">UNESCO</th><td>' + feature.properties.u + '</td></tr><tr><th scope="row">Ukupna površina</th><td>' + feature.properties.p + '</td></tr><tr><th scope="row">Površina kopno</th><td>' + feature.properties.pk + '</td></tr><tr><th scope="row">Površina more</th><td>' + feature.properties.pm + '</td></tr></table>';
     layer.bindPopup(popupContent);
     layer._leaflet_id = feature.properties.n;
 }

@@ -303,4 +303,4 @@ var exp_zps = {
 { "type": "Feature", "properties": { "n": "Trsteno - platana II", "kat": "spomenik parkovne arhitekture", "pkat": "pojedinacno stablo", "kateng": "Horticultural monument", "i": "-", "g": "1951" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 17.97884, 42.71406 ], [ 17.97859, 42.71393 ], [ 17.97847, 42.71408 ], [ 17.97865, 42.71421 ], [ 17.97884, 42.71406 ] ] ] ] } },
 { "type": "Feature", "properties": { "n": "Trsteno - platana I", "kat": "spomenik parkovne arhitekture", "pkat": "pojedinacno stablo", "kateng": "Horticultural monument", "i": "-", "g": "1951" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 17.97889, 42.71389 ], [ 17.97904, 42.71392 ], [ 17.97907, 42.7139 ], [ 17.97874, 42.71387 ], [ 17.97889, 42.71389 ] ] ] ] } }
 ]
-}
+};
