@@ -116,7 +116,7 @@ function onEachFeatureIwc(feature, layer) {
             dehighlight(e.target, doStyleIwc(e.target));
         }
     });
-    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>' + '<table><tr><th scope="row">Tip lokaliteta</th><td>' + feature.properties.t + '</td></tr></table>';
+    var popupContent = '<div style="text-align:center"><h3>' + feature.properties.n + '</h3></div>';
     layer.bindPopup(popupContent);
     layer._leaflet_id = feature.properties.n;
 }
