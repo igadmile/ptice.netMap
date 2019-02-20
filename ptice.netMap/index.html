@@ -1,70 +1,129 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>ptice.net karta</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <meta charset="utf-8" />
     <!--css-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+    />
     <link rel="stylesheet" href="css/includes.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-    <link rel="stylesheet" type="text/css" href="css/own_style.css">
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"
+    />
+    <link rel="stylesheet" type="text/css" href="css/own_style.css" />
+  </head>
 
-</head>
+  <body ng-app="chooseLayers">
+    <div
+      ng-controller="select"
+      ng-hide="smallScreen"
+      id="sidebar"
+      class="sidebar collapsed"
+      ng-cloak
+    >
+      <!-- Nav tabs -->
+      <div class="sidebar-tabs">
+        <ul role="tablist">
+          <li>
+            <a href="#home" role="tab"><i class="fa fa-bars"></i></a>
+          </li>
+        </ul>
+      </div>
 
-<body ng-app="chooseLayers">
-    <div ng-controller="select" ng-hide="smallScreen" id="sidebar" class="sidebar collapsed" ng-cloak>
-        <!-- Nav tabs -->
-        <div class="sidebar-tabs">
-            <ul role="tablist">
-                <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
-            </ul>
-        </div>
-
-        <!-- Tab panes -->
-        <div class="sidebar-content">
-            <div class="sidebar-pane" id="home">
-                <h1 class="sidebar-header">
-                    Odabir slojeva i poligona
-                    <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
-                </h1>
-                <div class="alert alert-warning spacer" role="alert">
-                    Iz ovih izbornika možete odabrati pozadinsku kartu, sloj i/ili poligon iz odabranog sloja.
-                    <br>
-                    <br>Pritiskom na gump "Prikaži na karti", na karti će se prikazati odabrani poligon. Gumb će biti omogućen nakon što odaberete poligon iz odabranog sloja
-                    <br>
-                    <br>Pritiskom na gumb "Prikaži link", dobit će te link kojeg možete koristiti za prikazivanje odabranog sloja i/ili poligona pri učitavanju stranice.
-                </div>
-                <form>
-                    <div class="form-group">
-                        <label>Odaberite pozadinsku kartu</label>
-                        <select class="form-control" ng-model="selectedBase" ng-options="selectedBase as baseLayer for (selectedBase, baseLayer) in baseLayers">
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Odaberite sloj</label>
-                        <select class="form-control" ng-options="selectedLayer as layer for (selectedLayer , layer) in layers" ng-model="selectedLayer" ng-change="resetFeature()">
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Odaberite poligon</label>
-                        <input type="text" ng-model="selectedFeature" uib-typeahead="feature.properties.n for feature in features[selectedLayer] | filter:$viewValue" typeahead-show-hint="true" class="form-control" reqired>
-                    </div>
-                </form>
-                <form class="form-inline">
-                    <div class="form-group">
-                        <button ng-disabled="!selectedFeature" ng-click="searchExpression(selectedLayer, selectedBase, selectedFeature)" type="submit" class="btn btn-success">Prikaži na karti</button>
-                    </div>
-                    <div class="form-group pull-right">
-                        <button ng-click="genUrl(selectedLayer, selectedBase, selectedFeature)" type="submit" class="btn btn-warning">Prikaži link</button>
-                    </div>
-                </form>
-                <div ng-show="urlReady" class="alert alert-warning spacer" role="alert">
-                    Vaš link je: <a ng-href="{{urlReady}}">{{urlReady}}</a></div>
+      <!-- Tab panes -->
+      <div class="sidebar-content">
+        <div class="sidebar-pane" id="home">
+          <h1 class="sidebar-header">
+            Odabir slojeva i poligona
+            <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+          </h1>
+          <div class="alert alert-warning spacer" role="alert">
+            Iz ovih izbornika možete odabrati pozadinsku kartu, sloj i/ili
+            poligon iz odabranog sloja.
+            <br />
+            <br />Pritiskom na gump "Prikaži na karti", na karti će se prikazati
+            odabrani poligon. Gumb će biti omogućen nakon što odaberete poligon
+            iz odabranog sloja
+            <br />
+            <br />Pritiskom na gumb "Prikaži link", dobit će te link kojeg
+            možete koristiti za prikazivanje odabranog sloja i/ili poligona pri
+            učitavanju stranice.
+          </div>
+          <form>
+            <div class="form-group">
+              <label>Odaberite pozadinsku kartu</label>
+              <select
+                class="form-control"
+                ng-model="selectedBase"
+                ng-options="selectedBase as baseLayer for (selectedBase, baseLayer) in baseLayers"
+              >
+              </select>
             </div>
+            <div class="form-group">
+              <label>Odaberite sloj</label>
+              <select
+                class="form-control"
+                ng-options="selectedLayer as layer for (selectedLayer , layer) in layers"
+                ng-model="selectedLayer"
+                ng-change="resetFeature()"
+              >
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Odaberite poligon</label>
+              <input
+                type="text"
+                ng-model="selectedFeature"
+                uib-typeahead="feature.properties.n for feature in features[selectedLayer] | filter:$viewValue"
+                typeahead-show-hint="true"
+                class="form-control"
+                reqired
+              />
+            </div>
+          </form>
+          <form class="form-inline">
+            <div class="form-group">
+              <button
+                ng-disabled="!selectedFeature"
+                ng-click="searchExpression(selectedLayer, selectedBase, selectedFeature)"
+                type="submit"
+                class="btn btn-success"
+              >
+                Prikaži na karti
+              </button>
+            </div>
+            <div class="form-group pull-right">
+              <button
+                ng-click="genUrl(selectedLayer, selectedBase, selectedFeature)"
+                type="submit"
+                class="btn btn-warning"
+              >
+                Prikaži link
+              </button>
+            </div>
+          </form>
+          <div
+            ng-show="urlReady"
+            class="alert alert-warning spacer"
+            role="alert"
+          >
+            Vaš link je: <a ng-href="{{ urlReady }}">{{ urlReady }}</a>
+          </div>
         </div>
+      </div>
     </div>
     <div id="map" class="sidebar-map"></div>
     <!--javascript-->
@@ -73,10 +132,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
     <script src="js/angular/app/app.js"></script>
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
-    <script src="js/includes.min.js"></script>
+    <script src="resources/includes.min.js"></script>
     <!--data-->
-    <script src='data/data.js?v=93'></script>
-    <script src='js/map.js?v=93'></script>
-</body>
-
+    <script src="data/data.js?v=93"></script>
+    <script src="js/map.js?v=93"></script>
+  </body>
 </html>
