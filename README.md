@@ -11,7 +11,7 @@ The maps is used to view and explore layers importan to nature protection in Cro
 - angular-ui-bootstrap
 
 # Feature overview
-![map overview](../screenshots/overview.jpg)
+![map overview](../screenshots/overview_2.jpg)
 
 When the layer feature is hovered, it will be higlihted.
 
